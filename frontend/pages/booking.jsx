@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import 'react-datepicker/dist/react-datepicker.css'
 import DatePicker, { registerLocale } from 'react-datepicker'
 import sv from 'date-fns/locale/sv'
 import Link from 'next/link'
