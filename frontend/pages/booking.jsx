@@ -4,13 +4,15 @@ import sv from 'date-fns/locale/sv'
 import Link from 'next/link'
 registerLocale('sv', sv)
 
+/*
+ * to do: rätta till tiden(den är 1 timme fel)
+ */
 function BookingPage() {
 
   const [datePicked, setDatePicked] = useState(new Date())
 
 
   return <div>
-    <h2>Inloggad som &quot;Bolaget AB&quot;</h2><hr/>
     <div>
       <h1>Gör din bokning här</h1>
     <DatePicker
