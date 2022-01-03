@@ -7,19 +7,19 @@ import javax.persistence.*;
 public class Cleaner {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int cleaner_id;
+    @GeneratedValue
+    private Long cleaner_id;
     private String fullName;
     private String address;
 
     public Cleaner() {
     }
 
-    public int getCleaner_id() {
+    public Long getCleaner_id() {
         return cleaner_id;
     }
 
-    public void setCleaner_id(int cleaner_id) {
+    public void setCleaner_id(Long cleaner_id) {
         this.cleaner_id = cleaner_id;
     }
 
