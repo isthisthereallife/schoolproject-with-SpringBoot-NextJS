@@ -1,23 +1,20 @@
-import React, {useState} from 'react'
-import DatePicker from 'react-datepicker'
-import { registerLocale, setDefaultLocale } from  "react-datepicker";
+import React, { useState } from 'react'
+import DatePicker, { registerLocale } from 'react-datepicker'
 import sv from 'date-fns/locale/sv'
-registerLocale('sv',sv)
+import Link from 'next/link'
+registerLocale('sv', sv)
 
 function BookingPage() {
-  const [datePicked, setDatePicked] = useState(new Date())
-  
-  const changeDatePicked = (e) =>{
-    setDatePicked(e.target.value)
-    console.log("changed date?",datePicked)
-  }
 
-  
+  const [datePicked, setDatePicked] = useState(new Date())
+
+
   return <div>
-    <h2>Inloggad som "Bolaget AB"</h2><hr/>
-    <div><h1>Gör din bokning</h1>
+    <h2>Inloggad som &quot;Bolaget AB&quot;</h2><hr/>
+    <div>
+      <h1>Gör din bokning här</h1>
     <DatePicker
-    locale='sv'
+    locale="sv"
       selected={datePicked}
       onChange={(date) => setDatePicked(date)}
       showTimeSelect
@@ -26,8 +23,9 @@ function BookingPage() {
       timeCaption="time"
       dateFormat="d MMMM, yyyy H:mm"
     />
-    
     </div>
+    <button><Link href="/confirmation">Boka</Link></button>
+
     </div>
 }
 
