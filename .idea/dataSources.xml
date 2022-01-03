@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="stada_fint@localhost" uuid="225e4073-b0b6-46ff-bb76-9b87695240ec">
+    <data-source source="LOCAL" name="stada_fint@localhost" uuid="03682df0-6061-488f-8c93-6c147e3022bc">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
