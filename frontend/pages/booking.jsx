@@ -12,24 +12,30 @@ function BookingPage() {
 
   const [datePicked, setDatePicked] = useState(new Date())
 
-
-  return <div>
+  // const changeDatePicked = (e) => {
+  //   console.log(e.target.value)
+  // }
+  return (
+  <div>
     <div>
       <h1>Gör din bokning här</h1>
-    <DatePicker
-    locale="sv"
-      selected={datePicked}
-      onChange={(date) => setDatePicked(date)}
-      showTimeSelect
-      timeFormat="HH:mm"
-      timeIntervals={15}
-      timeCaption="time"
-      dateFormat="d MMMM, yyyy H:mm"
-    />
+      <DatePicker
+        inline
+        locale="sv"
+        selected={datePicked}
+        onSelect={console.log(datePicked)}
+        onChange={(date) => setDatePicked(date)}
+        showTimeSelect
+        timeFormat="HH:mm"
+        timeIntervals={15}
+        timeCaption="Tid"
+        dateFormat="d MMMM, yyyy H:mm"
+      />
     </div>
     <button><Link href="/confirmation">Boka</Link></button>
 
-    </div>
+  </div>
+  )
 }
 
 export default BookingPage
