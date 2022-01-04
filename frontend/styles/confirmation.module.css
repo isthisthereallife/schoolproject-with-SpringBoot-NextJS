@@ -1,0 +1,15 @@
+.main{
+  display:flex;
+  flex-direction:column;
+  background-color: blanchedalmond;
+  height:100vh;
+}
+.backToStartButtondiv{
+  display:flex;
+  justify-content: center;
+}
+.backToStartButton{
+  display:flex;
+  width:30vw;
+  border-radius:10px;
+}
