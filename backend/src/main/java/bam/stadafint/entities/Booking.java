@@ -10,6 +10,8 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int booking_id;
+    private int cleaner_id;
+    private int customer_id;
     private String datetime;
     private String description;
     private String address;
@@ -24,6 +26,22 @@ public class Booking {
 
     public void setBooking_id(int booking_id) {
         this.booking_id = booking_id;
+    }
+
+    public int getCleaner_id() {
+        return cleaner_id;
+    }
+
+    public void setCleaner_id(int cleaner_id) {
+        this.cleaner_id = cleaner_id;
+    }
+
+    public int getCustomer_id() {
+        return customer_id;
+    }
+
+    public void setCustomer_id(int customer_id) {
+        this.customer_id = customer_id;
     }
 
     public String getDatetime() {
