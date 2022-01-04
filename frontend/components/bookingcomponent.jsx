@@ -17,8 +17,12 @@ const [datePicked, setDatePicked] = useState(new Date())
 return (
 <div className={styles.main}>
   <div>
-    <h1>Gör din bokning här</h1>
+  <h1 className={styles.headline}>Gör din bokning här</h1>
+    <div className={styles.datepickerdiv}>
+
     <DatePicker
+      calendarClassName={styles.datepicker}
+      wrapperClassName={styles.datepicker}
       inline
       locale="sv"
       selected={datePicked}
@@ -30,9 +34,11 @@ return (
       timeCaption="Tid"
       dateFormat="d MMMM, yyyy H:mm"
     />
+    </div>
   </div>
-  <button><Link href="/confirmation">Boka</Link></button>
-
+  <div className={styles.bookingbuttondiv}>
+    <button className={styles.bookingbutton}><Link href="/confirmation">Boka</Link></button>
+  </div>
 </div>
 )
 }

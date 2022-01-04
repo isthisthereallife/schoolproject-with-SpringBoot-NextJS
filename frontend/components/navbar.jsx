@@ -3,7 +3,7 @@ import styles from '../styles/Navbar.module.css'
 function Navbar() {
   return (
     <div className={styles.navbar}>
-    <h2>Inloggad som &quot;Bolaget AB&quot;</h2>
+    <h2>Inloggad som [Bolaget AB]</h2>
       </div>
   )
 }
