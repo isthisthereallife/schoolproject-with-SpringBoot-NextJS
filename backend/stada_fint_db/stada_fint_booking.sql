@@ -23,20 +23,19 @@ DROP TABLE IF EXISTS `booking`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `booking` (
-  `booking_id` int unsigned NOT NULL AUTO_INCREMENT,
-  `datetime` datetime NOT NULL,
-  `description` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `booking_id` int NOT NULL AUTO_INCREMENT,
+  `type_of_service` varchar(45) NOT NULL,
+  `address` varchar(45) NOT NULL,
   `customer_id` int NOT NULL,
   `cleaner_id` int NOT NULL,
-  `status` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `status` varchar(50) NOT NULL,
+  `datetime` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`booking_id`),
-  KEY `fk_cleaner_idx` (`booking_id`),
-  KEY `fk_customerId` (`customer_id`),
-  KEY `fk_cleanerId` (`cleaner_id`),
-  CONSTRAINT `fk_cleanerId` FOREIGN KEY (`cleaner_id`) REFERENCES `cleaner` (`cleaner_id`),
-  CONSTRAINT `fk_customerId` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+  KEY `fk_customer` (`customer_id`),
+  KEY `fk_cleaner` (`cleaner_id`),
+  CONSTRAINT `fk_cleaner` FOREIGN KEY (`cleaner_id`) REFERENCES `cleaner` (`cleaner_id`),
+  CONSTRAINT `fk_customer` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +44,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (1,'2022-01-01 08:00:00','basic','svarvaregatan 5',1,2,'null'),(2,'2022-01-02 10:00:00','basic','långholmen 3',3,1,'null'),(3,'2022-01-04 12:00:00','basic','sveavägen 3',2,3,'null');
+INSERT INTO `booking` VALUES (1,'Basic','Gågatan 5B',1,1,'Bokad','20220109 1000'),(2,'Fönstertvätt','Vinarevägen 8',2,2,'Obekräftad','20220109 1300');
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-03  9:15:26
+-- Dump completed on 2022-01-07 15:13:20

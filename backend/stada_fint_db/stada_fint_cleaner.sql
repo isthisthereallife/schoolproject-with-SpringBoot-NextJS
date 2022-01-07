@@ -24,10 +24,12 @@ DROP TABLE IF EXISTS `cleaner`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cleaner` (
   `cleaner_id` int NOT NULL AUTO_INCREMENT,
-  `full_name` varchar(45) COLLATE utf8_bin NOT NULL,
-  `address` varchar(45) COLLATE utf8_bin NOT NULL,
+  `first_name` varchar(45) NOT NULL,
+  `last_name` varchar(45) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `e_mail` varchar(45) NOT NULL,
   PRIMARY KEY (`cleaner_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +38,7 @@ CREATE TABLE `cleaner` (
 
 LOCK TABLES `cleaner` WRITE;
 /*!40000 ALTER TABLE `cleaner` DISABLE KEYS */;
-INSERT INTO `cleaner` VALUES (1,'Knugen Bernadott','Slottsgatan'),(2,'Adam Af Schvedem','Holmentorget 4'),(3,'Linda Uggla','Popsigatan 3');
+INSERT INTO `cleaner` VALUES (1,'Carl','Bernadotth','Slottsgatan 5','kung@kung.se'),(2,'Philip','Bernadotth','Slottsgatan 9','prins@prins.se'),(3,'Madeleine','Stefensson','Slottsgatan 10','sessa@sessa.com');
 /*!40000 ALTER TABLE `cleaner` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-03  9:15:26
+-- Dump completed on 2022-01-07 15:13:20

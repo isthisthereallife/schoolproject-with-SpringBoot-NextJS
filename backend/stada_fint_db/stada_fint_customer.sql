@@ -24,10 +24,13 @@ DROP TABLE IF EXISTS `customer`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customer` (
   `customer_id` int NOT NULL AUTO_INCREMENT,
-  `full_name` varchar(45) COLLATE utf8_bin NOT NULL,
-  `address` varchar(45) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+  `first_name` varchar(45) NOT NULL,
+  `last_name` varchar(45) NOT NULL,
+  `address` varchar(45) NOT NULL,
+  `e_mail` varchar(45) NOT NULL,
+  PRIMARY KEY (`customer_id`),
+  UNIQUE KEY `customer_id_UNIQUE` (`customer_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +39,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'Arne Svensson','Gråkullavägen 2'),(2,'Eva Smith','Landgångsvägen 4'),(3,'Melinda Jansson','Huldingsgatan 9');
+INSERT INTO `customer` VALUES (1,'Anders','Andersson','Gågatan 5','anders@anders.com'),(2,'Fia','Johansson','Stockholmsvägen 3','fia@fia.com'),(3,'Carl-Oskar','Svensson','Stenvägen 3','calle@calle.com');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-03  9:15:25
+-- Dump completed on 2022-01-07 15:13:20

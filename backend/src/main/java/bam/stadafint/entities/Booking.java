@@ -56,8 +56,8 @@ public class Booking {
         return type_of_service;
     }
 
-    public void setType_of_service(String description) {
-        this.type_of_service = description;
+    public void setType_of_service(String type_of_service) {
+        this.type_of_service = type_of_service;
     }
 
     public String getAddress() {
