@@ -20,6 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> getAllCustomers() {
+
         return customerRepository.findAll();
     }
 }

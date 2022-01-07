@@ -21,7 +21,7 @@ public class CustomerController {
         return "A new customer is added";
     }
 
-    @GetMapping("/readAll")
+    @GetMapping("/getAll")
     public List<Customer> list() {
         return customerService.getAllCustomers();
     }

@@ -8,7 +8,7 @@ public class Cleaner {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cleaner_id;
+    private int cleaner_id;
     private String first_name;
     private String last_name;
     private String address;
@@ -17,11 +17,11 @@ public class Cleaner {
     public Cleaner() {
     }
 
-    public Long getCleaner_id() {
+    public int getCleaner_id() {
         return cleaner_id;
     }
 
-    public void setCleaner_id(Long cleaner_id) {
+    public void setCleaner_id(int cleaner_id) {
         this.cleaner_id = cleaner_id;
     }
 

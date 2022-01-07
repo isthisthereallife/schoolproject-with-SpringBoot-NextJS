@@ -13,7 +13,7 @@ public class Booking {
     private int cleaner_id;
     private int customer_id;
     private String datetime;
-    private String description;
+    private String type_of_service;
     private String address;
     private String status;
 
@@ -52,12 +52,12 @@ public class Booking {
         this.datetime = datetime;
     }
 
-    public String getDescription() {
-        return description;
+    public String getType_of_service() {
+        return type_of_service;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setType_of_service(String description) {
+        this.type_of_service = description;
     }
 
     public String getAddress() {
