@@ -22,4 +22,9 @@ public class BookingServiceImpl implements BookingService {
     public List<Booking> getAllBookings() {
         return bookingRepository.findAll();
     }
+
+    @Override
+    public void deleteBooking(int booking_id){
+        bookingRepository.deleteById(booking_id);
+    }
 }

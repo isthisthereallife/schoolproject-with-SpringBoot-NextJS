@@ -7,4 +7,5 @@ public interface BookingService {
 
     Booking saveBooking(Booking booking);
     List<Booking> getAllBookings();
+    void deleteBooking(int booking_id);
 }
