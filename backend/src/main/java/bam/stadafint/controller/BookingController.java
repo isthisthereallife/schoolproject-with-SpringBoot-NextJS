@@ -11,6 +11,7 @@ import java.util.List;
 @RequestMapping("/booking")
 @CrossOrigin
 public class BookingController {
+
     @Autowired
     private BookingService bookingService;
 

@@ -7,10 +7,12 @@ import javax.persistence.*;
 public class Cleaner {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cleaner_id;
-    private String fullName;
+    private String first_name;
+    private String last_name;
     private String address;
+    private String e_mail;
 
     public Cleaner() {
     }
@@ -23,12 +25,20 @@ public class Cleaner {
         this.cleaner_id = cleaner_id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getAddress() {
@@ -37,5 +47,13 @@ public class Cleaner {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getE_mail() {
+        return e_mail;
+    }
+
+    public void setE_mail(String e_mail) {
+        this.e_mail = e_mail;
     }
 }
