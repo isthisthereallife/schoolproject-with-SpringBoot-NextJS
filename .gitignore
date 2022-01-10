@@ -15,6 +15,9 @@ backend/target/
 
 ### IntelliJ IDEA ###
 /src/main/resources/application.properties
+/.idea
+.idea
+/target/
 
 ### NetBeans ###
 /nbproject/private/
@@ -28,7 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+/node_modules
 
+.next
+/.next
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
