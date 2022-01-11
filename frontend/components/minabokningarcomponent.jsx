@@ -1,15 +1,21 @@
-import React from 'react'
-import fetch from 'node-fetch'
+import React, { useEffect, useState } from 'react'
 
-export default function MinabokningarComponent() {
-  const response = await fetch('http://localhost:80
+export default function MinabokningarComponent(minaBokningar) {
+const [bookings, setBookings] = useState("")
+
+  useEffect(() => {
+    console.log(minaBokningar)
+    console.log("used effect")
+  }, [bookings])
   let testVar = "and this is a var"
   let testNum = 0
   return (
     <>
       <div>
-        THIS IS A COMPONENT! ${testVar}
-        this many times rendered: ${testNum}
+        THIS IS A COMPONENT! {testVar}<hr/>
+        this many times rendered: {testNum}
+
+        Mina bokningar: {bookings}
       </div>
     </>
   )

@@ -1,12 +1,21 @@
-import React from 'react'
-import MinabokningarComponent from '../components/minabokningarcomponent'
+import React, { useState } from 'react'
 
-function BookingPage() {
+import Minabokningarcomponent from '../components/minabokningarcomponent'
+
+function BookingPage(bookingsdata) {
+  const [bookings, setBookings] = useState(bookingsdata)
 return (
   <>
-  <MinabokningarComponent/>
+  <Minabokningarcomponent {...bookings}/>
   </>
 )
+}
+export async function getStaticProps() {
+  const response = await fetch('http://localhost:8080/booking/getAll')
+  const data = await response.json()
+  return {
+    props: { data }
+  }
 }
 
 export default BookingPage
