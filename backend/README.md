@@ -14,8 +14,10 @@ ADD
 - /booking/add
 
 GET
-- /booking/{bookingid} 
 - /booking/getAll
+
+DELETE
+- /booking/delete/{bookingid} 
 
 (e.g. localhost:8080/booking/getAll)
 #### Customer

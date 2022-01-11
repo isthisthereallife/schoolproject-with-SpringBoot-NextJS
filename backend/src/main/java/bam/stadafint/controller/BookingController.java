@@ -28,7 +28,7 @@ public class BookingController {
         return bookingService.getAllBookings();
     }
 
-    @DeleteMapping("/{booking_id}")
+    @DeleteMapping("/delete/{booking_id}")
     private void delete(@PathVariable("booking_id") int booking_id) {
         bookingService.deleteBooking(booking_id);
         System.out.println("Your booking has been removed");
