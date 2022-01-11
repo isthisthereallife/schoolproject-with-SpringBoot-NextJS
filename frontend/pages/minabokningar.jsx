@@ -11,6 +11,7 @@ return (
 )
 }
 export async function getStaticProps() {
+  console.log("Laddar in props automatiskt")
   const response = await fetch('http://localhost:8080/booking/getAll')
   const data = await response.json()
   return {
