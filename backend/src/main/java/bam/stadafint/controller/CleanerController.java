@@ -26,4 +26,16 @@ public class CleanerController {
         return cleanerService.getAllCleaners();
     }
 
+    @DeleteMapping("/delete/{cleaner_id}")
+    private void delete(@PathVariable("cleaner_id") int cleaner_id) {
+        cleanerService.deleteCleaner(cleaner_id);
+        System.out.println("This cleaner has been removed");
+    }
+
+    @PutMapping("/update")
+    private Cleaner update(@RequestBody Cleaner cleaner) {
+        cleanerService.saveOrUpdate(cleaner);
+        System.out.println("Info has been updated");
+        return cleaner;
+    }
 }

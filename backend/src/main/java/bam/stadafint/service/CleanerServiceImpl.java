@@ -23,4 +23,14 @@ public class CleanerServiceImpl implements CleanerService {
         return cleanerRepository.findAll();
     }
 
+    @Override
+    public void deleteCleaner(int cleaner_id) {
+        cleanerRepository.deleteById(cleaner_id);
+    }
+
+    @Override
+    public void saveOrUpdate(Cleaner cleaner) {
+        cleanerRepository.save(cleaner);
+    }
+
 }

@@ -27,4 +27,9 @@ public class BookingServiceImpl implements BookingService {
     public void deleteBooking(int booking_id){
         bookingRepository.deleteById(booking_id);
     }
+
+    @Override
+    public void saveOrUpdate(Booking booking){
+        bookingRepository.save(booking);
+    }
 }

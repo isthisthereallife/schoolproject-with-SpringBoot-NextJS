@@ -26,6 +26,16 @@ public class CustomerController {
         return customerService.getAllCustomers();
     }
 
+    @DeleteMapping("/delete/{customer_id}")
+    private void delete(@PathVariable("customer_id") int customer_id) {
+        customerService.deleteCustomer(customer_id);
+        System.out.println("This customer has been removed");
+    }
 
-
+    @PutMapping("/update")
+    private Customer update(@RequestBody Customer customer) {
+        customerService.saveOrUpdate(customer);
+        System.out.println("Info has been updated");
+        return customer;
+    }
 }
