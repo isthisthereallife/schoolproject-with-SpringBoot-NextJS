@@ -41,13 +41,15 @@ let testNum = 0
         <hr/>
       </div>
       <div>
-         * {bookings && bookings.map((booking) => (
+          {bookings && bookings.map((booking) => (
           <Link key={booking.booking_id} href={`/booking/${booking.booking_id.toString()}`}>
             <div key={booking.booking_id}>bokning{booking.booking_id}
             <div>HEJ TEXT</div>
             </div>
             </Link>
         ))}
+        </div>
+        <div>
         Mina bokningar: {bookings}
         <button onClick={bookingFunction}>ladda om mina bokningar</button>
       </div>
