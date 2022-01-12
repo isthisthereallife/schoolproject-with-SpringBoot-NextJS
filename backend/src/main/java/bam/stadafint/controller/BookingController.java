@@ -34,4 +34,11 @@ public class BookingController {
         System.out.println("Your booking has been removed");
     }
 
+    @PutMapping("/update")
+    private Booking update(@RequestBody Booking booking) {
+        bookingService.saveOrUpdate(booking);
+        System.out.println("The booking has been updated");
+        return booking;
+    }
+
 }
