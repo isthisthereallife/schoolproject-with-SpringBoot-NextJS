@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface CleanerService {
 
-    public Cleaner saveCleaner(Cleaner cleaner);
-    public List<Cleaner> getAllCleaners();
+    Cleaner saveCleaner(Cleaner cleaner);
+    List<Cleaner> getAllCleaners();
+    void deleteCleaner(int cleaner_id);
+    void saveOrUpdate(Cleaner cleaner);
 }
