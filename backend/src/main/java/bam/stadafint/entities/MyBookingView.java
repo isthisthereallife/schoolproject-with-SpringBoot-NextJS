@@ -17,6 +17,7 @@ public class MyBookingView implements Serializable {
 
     @Id
     private int boknings_id;
+    private int customer_id;
     private String kundnamn_fornamn;
     private String kundnamn_efternamn;
     private String address;
@@ -25,20 +26,20 @@ public class MyBookingView implements Serializable {
     private String status;
 
 
-    public int getBookingID() {
-        return boknings_id;
-    }
-
-    public void setBookingID(int bookingID) {
-        this.boknings_id = bookingID;
-    }
-
     public int getBoknings_id() {
         return boknings_id;
     }
 
     public void setBoknings_id(int boknings_id) {
         this.boknings_id = boknings_id;
+    }
+
+    public int getCustomer_id() {
+        return customer_id;
+    }
+
+    public void setCustomer_id(int customer_id) {
+        this.customer_id = customer_id;
     }
 
     public String getKundnamn_fornamn() {
@@ -71,14 +72,6 @@ public class MyBookingView implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getDateAndTime() {
-        return date_and_time;
-    }
-
-    public void setDateAndTime(String date_and_time) {
-        this.date_and_time = date_and_time;
     }
 
     public String getDescription() {

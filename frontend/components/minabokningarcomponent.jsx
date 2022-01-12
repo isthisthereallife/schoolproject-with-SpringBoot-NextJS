@@ -4,58 +4,44 @@ import PropTypes from 'prop-types'
 
 
 MinabokningarComponent.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.object
 }
 
 export default function MinabokningarComponent({ data }) {
-  console.log("DATA", data)
-const [[bookings], setBookings] = useState(data)
-console.log("nyyyy bookings", bookings)
+  console.log("DATA IN", data.userBookings)
+
+const [bookings, setBookings] = useState(data.userBookings)
 
 
   useEffect(() => {
-    console.log("data i useEffecten")
-    console.log(data)
-    console.log("bookings i useEffecten")
-    console.log(bookings)
+    console.log("useEffect bookings:", bookings)
   }, [])
 
 
   async function bookingFunction() {
-    console.log("bookingFunction on click")
     let temp = await reloadBookings()
-    console.log("sparar ner detta temp: ", temp)
-    console.log("temp.data", temp.data)
-    console.log("temp[0]", temp[0])
-    setBookings(temp)
-    console.log("bookings: ", bookings)
+    setBookings([temp])
   }
+
   return (
     <>
       <div>
         <hr/>
       </div>
       <div>
+
         {bookings && bookings.map((booking) => (
-          <div key={booking.bookingID}>HEJ</div>
-
-          /*
-           * <div key={booking.bookingID}>
-           *   <Link href={`/minabokningar/${booking.bookingID}`}>
-           *     <div key={booking.bookingID}>bokning{booking.bookingID}
-           */
-
-
-          /*
-           *     </div>
-           *   </Link>
-           * </div>
-           */
+          <div key={booking.boknings_id}>
+            <div key={booking.boknings_id}>hej {booking.kundnamn_fornamn} </div>
+            <div key={booking.boknings_id}>Här är dina bokningar: </div>
+            <div key={booking.boknings_id}>#{booking.boknings_id}  {booking.date_and_time}</div>
+          <hr/>
+          </div>
         ))}
-      </div>
-        <div>
-        Mina bokningar: {bookings}
+
+         <div>
         <button onClick={bookingFunction}>ladda om mina bokningar</button>
+        </div>
       </div>
     </>
   )
@@ -63,6 +49,5 @@ console.log("nyyyy bookings", bookings)
 async function reloadBookings() {
   let res = await fetch(`http://localhost:8080/mybookings/1`)
   let data = await res.json()
-  console.log("reloading bookings", await data)
-  return data
+  return { ...data }
 }
