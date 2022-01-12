@@ -4,51 +4,55 @@ import PropTypes from 'prop-types'
 
 
 MinabokningarComponent.propTypes = {
-  minaBokningar: PropTypes.array
+  data: PropTypes.array
 }
 
-export default function MinabokningarComponent({ minaBokningar }) {
-  const [bookings, setBookings] = useState(minaBokningar)
-const [num, setNum] = useState(0)
-let testNum = 0
+export default function MinabokningarComponent({ data }) {
+  console.log("DATA", data)
+const [[bookings], setBookings] = useState(data)
+console.log("nyyyy bookings", bookings)
+
 
   useEffect(() => {
-    console.log("mina bokningar i useEffecten")
-    console.log(minaBokningar)
+    console.log("data i useEffecten")
+    console.log(data)
     console.log("bookings i useEffecten")
     console.log(bookings)
-    testNum += 1
-  }, [bookings])
+  }, [])
 
 
   async function bookingFunction() {
-    testNum += 1
-    setNum(num + 1)
     console.log("bookingFunction on click")
     let temp = await reloadBookings()
-    console.log("sparar ner detta temp.data: ", temp)
-    setBookings(temp.data)
-    console.log("testar att skriva ut en bokning: ", temp[0])
+    console.log("sparar ner detta temp: ", temp)
+    console.log("temp.data", temp.data)
+    console.log("temp[0]", temp[0])
+    setBookings(temp)
+    console.log("bookings: ", bookings)
   }
   return (
     <>
       <div>
-        Hålla koll på re-rendering av skärmen
-        <hr/>
-        med vanlig variabel: {testNum}
-        <hr/>
-        men en useState-variabel: {num}
         <hr/>
       </div>
       <div>
-          {bookings && bookings.map((booking) => (
-          <Link key={booking.booking_id} href={`/booking/${booking.booking_id.toString()}`}>
-            <div key={booking.booking_id}>bokning{booking.booking_id}
-            <div>HEJ TEXT</div>
-            </div>
-            </Link>
+        {bookings && bookings.map((booking) => (
+          <div key={booking.bookingID}>HEJ</div>
+
+          /*
+           * <div key={booking.bookingID}>
+           *   <Link href={`/minabokningar/${booking.bookingID}`}>
+           *     <div key={booking.bookingID}>bokning{booking.bookingID}
+           */
+
+
+          /*
+           *     </div>
+           *   </Link>
+           * </div>
+           */
         ))}
-        </div>
+      </div>
         <div>
         Mina bokningar: {bookings}
         <button onClick={bookingFunction}>ladda om mina bokningar</button>
@@ -57,8 +61,8 @@ let testNum = 0
   )
 }
 async function reloadBookings() {
-  let res = await fetch('http://localhost:8080/booking/getAll')
-  let data = res.json()
+  let res = await fetch(`http://localhost:8080/mybookings/1`)
+  let data = await res.json()
   console.log("reloading bookings", await data)
   return data
 }
