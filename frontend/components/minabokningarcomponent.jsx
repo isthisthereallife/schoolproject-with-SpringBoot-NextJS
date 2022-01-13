@@ -7,6 +7,10 @@ MinabokningarComponent.propTypes = {
   data: PropTypes.object
 }
 
+
+/**
+ * den här ska sidan skriva ut den aktiva användarens bokningar
+ */
 export default function MinabokningarComponent({ data }) {
   console.log("DATA IN", data.userBookings)
 
@@ -20,7 +24,9 @@ const [bookings, setBookings] = useState(data.userBookings)
 
   async function bookingFunction() {
     let temp = await reloadBookings()
+    console.log("[temp]", [temp])
     setBookings([temp])
+    console.log("reloaded", [temp])
   }
 
   return (
@@ -40,7 +46,6 @@ const [bookings, setBookings] = useState(data.userBookings)
         ))}
 
          <div>
-        <button onClick={bookingFunction}>ladda om mina bokningar</button>
         </div>
       </div>
     </>
@@ -48,6 +53,7 @@ const [bookings, setBookings] = useState(data.userBookings)
 }
 async function reloadBookings() {
   let res = await fetch(`http://localhost:8080/mybookings/1`)
-  let data = await res.json()
-  return { ...data }
+  let userBookings = await res.json()
+  console.log("reload", userBookings)
+  return { ...userBookings }
 }

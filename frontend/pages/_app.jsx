@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Navbar from '../components/navbar'
+import ActiveUserProvider from '../components/context/activeUserProvider'
+import Navbarcomponent from '../components/navbarcomponent'
 StadaFint.propTypes = {
   Component: PropTypes.func,
   pageProps: PropTypes.object
@@ -9,8 +10,10 @@ StadaFint.propTypes = {
 function StadaFint({ Component, pageProps }) {
   return (
     <>
-    <Navbar />
+    <ActiveUserProvider>
+    <Navbarcomponent />
     <Component {...pageProps}/>
+    </ActiveUserProvider>
     </>
   )
 }
