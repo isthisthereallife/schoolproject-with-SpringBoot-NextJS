@@ -2,6 +2,7 @@ package bam.stadafint.service;
 
 import bam.stadafint.entities.Booking;
 import java.util.List;
+import java.util.Optional;
 
 public interface BookingService {
 

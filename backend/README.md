@@ -15,6 +15,7 @@ ADD
 
 GET
 - /booking/getAll
+- /booking/get/{customerid}
 
 DELETE
 - /booking/delete/{bookingid} 
