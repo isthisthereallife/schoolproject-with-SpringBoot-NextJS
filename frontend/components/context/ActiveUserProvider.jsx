@@ -1,10 +1,10 @@
 import { React, createContext, useReducer } from 'react'
 import { activeUserReducer } from '../../lib/reducers/activeUserReducer'
 import PropTypes from 'prop-types'
-import ActiveUserContextValue from '../../lib/interfaces/activeUserContextValue'
+
 
 // provider provides a context for the user
-export const ActiveUserContext = React.createContext < ActiveUserContextValue > ({
+export const ActiveUserContext = React.createContext({
   userId: 666,
   firstName: "activeUserContext initierades med detta",
   lastName: "aUp lastname here",

@@ -25,27 +25,44 @@ public class BookingController {
         return "A new booking is added";
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/get/all")
     public List<Booking> list() {
         return bookingService.getAllBookings();
     }
 
-    //maybe fix better
-    @GetMapping("/get/{customer_id}")
+    @GetMapping("/get/user/{customer_id}")
     private List<Booking> getBookingsByCustomerId(@PathVariable("customer_id") int customer_id) {
         List bookings = bookingService.getAllBookings();
         List output = new ArrayList<Booking>();
         for (Object b : bookings){
-            System.out.println(b.getClass());
             Booking c = (Booking) b;
             if (c.getCustomer_id()==customer_id){
                 output.add(b);
+                System.out.println("found booking "+b.toString());
             }
         }
-
         return output;
     }
 
+
+    @GetMapping("/get/id/{booking_id}")
+    private Booking getByBookingById(@PathVariable("booking_id") int booking_id){
+        //return bookingService.getBooking(booking_id);
+
+        /* jag får inte den ^ att funka :/ så jag fuskar /M
+         */
+        List bookings = bookingService.getAllBookings();
+        List output = new ArrayList<Booking>();
+        for (Object b : bookings){
+            Booking c = (Booking) b;
+            if (c.getBooking_id()==booking_id){
+                System.out.println("found booking "+((Booking) b).toString());
+                return (Booking)b;
+            }
+        }
+        return null;
+
+    }
     @DeleteMapping("/delete/{booking_id}")
     private void delete(@PathVariable("booking_id") int booking_id) {
         bookingService.deleteBooking(booking_id);

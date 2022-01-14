@@ -52,7 +52,7 @@ const [bookings, setBookings] = useState(data.userBookings)
   )
 }
 async function reloadBookings() {
-  let res = await fetch(`http://localhost:8080/mybookings/1`)
+  let res = await fetch(`http://localhost:8080/booking/get/user/1`)
   let userBookings = await res.json()
   console.log("reload", userBookings)
   return { ...userBookings }

@@ -16,13 +16,18 @@ public class BookingServiceImpl implements BookingService {
     private BookingRepository bookingRepository;
 
     @Override
-    public Booking saveBooking(Booking booking) {
-        return bookingRepository.save(booking);
+    public void saveBooking(Booking booking) {
+        bookingRepository.save(booking);
     }
 
     @Override
     public List<Booking> getAllBookings() {
         return bookingRepository.findAll();
+    }
+
+    @Override
+    public Booking getBooking(int booking_id) {
+        return bookingRepository.getById(booking_id);
     }
 
     @Override

@@ -10,7 +10,7 @@ return (
 )
 }
 export async function getStaticProps() {
-  const response = await fetch(`http://localhost:8080/mybookings/1`)
+  const response = await fetch(`http://localhost:8080/booking/get/user/1`)
   const userBookings = await response.json()
   console.log("returnerar detta från getStaticProps: ", userBookings)
   return { props: { userBookings } }

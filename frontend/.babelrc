@@ -1,7 +1,0 @@
-{
-  "presets": ["@babel/preset-env", "@babel/preset-react"],
-  "plugins": ["@babel/plugin-transform-modules-commonjs"],
-  "transformIgnorePatterns": [
-  "node_modules/(?!(babel-react-bootstrap)/)"
-  ]
-}
