@@ -21,7 +21,8 @@ GET
 DELETE
 - /booking/delete/{bookingid} 
 
-(e.g. localhost:8080/booking/get/all)
+(e.g.   localhost:8080/booking/get/all
+        localhost:8080/booking/get/user/1)
 #### Customer
 
 - /customer
