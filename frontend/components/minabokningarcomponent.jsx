@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
 import useActiveUser from '../lib/hooks/useActiveUser'
+import { Grid, ListItem } from '@material-ui/core'
 import { USER_ACTIONS } from '../lib/reducers/activeUserReducer'
-
+import styles from '../styles/minabokningarcomponent.module.css'
 
 MinabokningarComponent.propTypes = {
   data: PropTypes.object
@@ -16,34 +17,30 @@ MinabokningarComponent.propTypes = {
 export default function MinabokningarComponent({ data }) {
   console.log("DATA IN", data.userBookings)
 
-  const activeUser = useActiveUser()
+
   const [bookings, setBookings] = useState(data.userBookings)
 
-
-  useEffect(() => {
-    console.log("useEffect bookings:", bookings)
-  }, [])
-
-
-  async function bookingFunction() {
-    let temp = await reloadBookings()
-    console.log("[temp]", [temp])
-    setBookings([temp])
-    console.log("reloaded", [temp])
-  }
-
+  const activeUser = useActiveUser()
+  console.log("activeUser i minabokningarcomponent:", activeUser)
   return (
     <>
       <div>
-        <div >{activeUser.firstName} </div>
+        <div >{activeUser.activeUser.firstName} </div>
           <div >Här är dina bokningar: </div>
-        </div>
-        {bookings && bookings.map((booking) => (
-          <div key={booking.booking_id}>
-            <div key={booking.booking_id}>| #{booking.booking_id}  📆{booking.datetime}🕙 <br/> | Städtyp: {booking.type_of_service} | Status: {booking.status} </div>
           <hr/>
-          </div>
+        </div>
+
+        <Grid className={styles.gridcontainer} container spacing={2}>
+        {bookings && bookings.map((booking) => (
+          <Grid className={styles.bookingcard} key={booking.booking_id} item container xs={6} md={4} lg={2} spacing={1}>
+            <ListItem key={booking.booking_id}>BokningsID: #{booking.booking_id}</ListItem>
+            <ListItem>📆{booking.datetime}🕙</ListItem>
+            <ListItem>Städtyp: {booking.type_of_service}</ListItem>
+            <ListItem> Status: {booking.status}</ListItem>
+        </Grid>
         ))}
+        </Grid>
+
     </>
   )
 }

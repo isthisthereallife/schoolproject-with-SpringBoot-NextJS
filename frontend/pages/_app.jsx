@@ -17,6 +17,4 @@ function StadaFint({ Component, pageProps }) {
     </>
   )
 }
-
-
 export default StadaFint

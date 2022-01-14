@@ -6,15 +6,13 @@ export const USER_ACTIONS = {
 export function userReducer(state, action) {
 
   switch (action.type) {
-    case 'login': {
+    case USER_ACTIONS.LOGIN: {
       return {
-        ...state,
         activeUser: action.payload
       }
     }
-    case 'logout': {
+    case USER_ACTIONS.LOGOUT: {
       return {
-        ...state,
         activeUser: null
       }
     }
@@ -25,3 +23,4 @@ export function userReducer(state, action) {
       }
   }
 }
+export default userReducer
