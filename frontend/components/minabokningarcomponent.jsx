@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
+import useActiveUser from '../lib/hooks/useActiveUser'
+import { USER_ACTIONS } from '../lib/reducers/activeUserReducer'
 
 
 MinabokningarComponent.propTypes = {
@@ -14,7 +16,8 @@ MinabokningarComponent.propTypes = {
 export default function MinabokningarComponent({ data }) {
   console.log("DATA IN", data.userBookings)
 
-const [bookings, setBookings] = useState(data.userBookings)
+  const activeUser = useActiveUser()
+  const [bookings, setBookings] = useState(data.userBookings)
 
 
   useEffect(() => {
@@ -32,22 +35,15 @@ const [bookings, setBookings] = useState(data.userBookings)
   return (
     <>
       <div>
-        <hr/>
-      </div>
-      <div>
-
+        <div >{activeUser.firstName} </div>
+          <div >Här är dina bokningar: </div>
+        </div>
         {bookings && bookings.map((booking) => (
-          <div key={booking.boknings_id}>
-            <div key={booking.boknings_id}>hej {booking.kundnamn_fornamn} </div>
-            <div key={booking.boknings_id}>Här är dina bokningar: </div>
-            <div key={booking.boknings_id}>#{booking.boknings_id}  {booking.date_and_time}</div>
+          <div key={booking.booking_id}>
+            <div key={booking.booking_id}>| #{booking.booking_id}  📆{booking.datetime}🕙 <br/> | Städtyp: {booking.type_of_service} | Status: {booking.status} </div>
           <hr/>
           </div>
         ))}
-
-         <div>
-        </div>
-      </div>
     </>
   )
 }

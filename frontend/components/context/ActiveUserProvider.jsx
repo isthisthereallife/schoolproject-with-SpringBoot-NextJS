@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 
 
 // provider provides a context for the user
-export const ActiveUserContext = React.createContext({
+export const ActiveUserContext = createContext({
   userId: 666,
-  firstName: "activeUserContext initierades med detta",
+  firstName: "Hej från activeUserContext i ActiveUserProvider",
   lastName: "aUp lastname here",
   bookings: [{}]
 })
@@ -20,7 +20,7 @@ const ActiveUserProvider = ({ children }) => {
     bookings: [{}]
   })
 
-  console.log(ActiveUserContext)
+  console.log("ActiveUserContext", ActiveUserContext)
   return (
     <ActiveUserContext.Provider value={{
       activeUser,

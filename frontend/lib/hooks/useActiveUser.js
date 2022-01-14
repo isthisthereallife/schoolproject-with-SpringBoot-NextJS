@@ -1,4 +1,4 @@
-import { ActiveUserContext } from '../../components/context/ActiveUserProvider'
+import { ActiveUserContext } from '../../components/context/activeUserProvider'
 import { useContext } from 'react'
 
 export default function useActiveUser() {
