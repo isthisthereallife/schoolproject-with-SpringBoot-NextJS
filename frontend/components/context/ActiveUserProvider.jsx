@@ -9,13 +9,12 @@ export const ActiveUserContext = createContext()
 
 const ActiveUserProvider = ({ children }) => {
   const [activeUser, activeUserDispatch] = useReducer(userReducer, {
-    userId: 666,
-    firstName: "activeUserProvider sent this",
-    lastName: "ändrat lastname",
+    userId: 1,
+    firstName: "[sätt i activeUserProvider]",
+    lastName: "lastname",
     bookings: [{}]
   })
 
-  console.log("ActiveUserContext i activeUserProvider: ", ActiveUserContext)
   return (
     <ActiveUserContext.Provider value={{ activeUser,
       activeUserDispatch }

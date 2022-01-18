@@ -1,7 +1,11 @@
 import React from 'react'
+import useActiveUser from '../../lib/hooks/useActiveUser'
+
 
 export default function bokning(bokningsinfo) {
-console.log("bokningsinfo: ", bokningsinfo)
+const activeUser = useActiveUser()
+
+  console.log("bokningsinfo: ", bokningsinfo)
   return (
     <>
       <div>
@@ -16,7 +20,8 @@ console.log("bokningsinfo: ", bokningsinfo)
 }
 
 export async function getStaticPaths() {
-  const res = await fetch(`http://localhost:8080/booking/get/user/1`)
+  const res = await fetch(`http://localhost:8080/booking/get/all`)
+
   const data = await res.json()
   //console.log("data i getStaticPATHS", data)
 

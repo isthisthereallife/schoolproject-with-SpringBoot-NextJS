@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from '@material-ui/core'
 import { FaRegCalendarPlus, FaCalendarDay, FaArrowRight } from 'react-icons/fa'
 import Link from 'next/link'
@@ -7,13 +7,18 @@ import Minabokningarcomponent from '../components/minabokningarcomponent'
 import MinaSidorComponent from '../components/minasidorcomponent'
 import useActiveUser from '../lib/hooks/useActiveUser'
 
-let id = 0
 
 function MyPages(userBookings) {
-
+  const [bookings, setBookings] = useState(userBookings)
+  const [loaded, setLoaded] = useState(false)
   const activeUser = useActiveUser()
-  id = activeUser.userId
-  console.log(id)
+
+
+    useEffect(() => {
+      console.log("minasidor useEffect activeUser.activeUser", activeUser.activeUser)
+      if (!loaded) getUserBookings(activeUser).then((eachBooking) => setBookings(eachBooking))
+      setLoaded(true)
+    }, [loaded, activeUser])
 
   return <>
     <div className={styles.main}>
@@ -23,10 +28,21 @@ function MyPages(userBookings) {
       <button onClick={MinaSidorComponent.updateUser}>Ändra</button>
 
       <h2>Mina bokningar</h2>
-      <Minabokningarcomponent data={userBookings} />
+      <Minabokningarcomponent data={bookings} />
       <div>Boka fler städningar: <Link href="/booking">Bokning</Link></div>
     </div>
   </>
+}
+
+// eslint-disable-next-line require-await
+async function getUserBookings(activeUser) {
+  return reloadProps(activeUser.activeUser.userId)
+}
+async function reloadProps(id) {
+
+  const res = await fetch(`http://localhost:8080/booking/get/user/${id}`)
+  const data = await res.json()
+  return { data }
 }
 
 export async function getStaticProps() {

@@ -9,8 +9,7 @@ function Navbarcomponent() {
   const activeUser = useActiveUser()
 
 
-  console.log("activeUser i navbarcomponent: ", activeUser.activeUser)
-  return (
+ return (
     <>
       <Grid container className={styles.navbar}>
         <Grid item xs={2}>
@@ -30,24 +29,42 @@ function Navbarcomponent() {
           </Link>
         </Grid>
         <Grid item xs={2}>
-          <Button onClick={() => logout(activeUser)} variant="contained">Logga ut</Button>
+          <Button onClick={() => debugChangeUser(activeUser)} variant="contained">Växla användare</Button>
         </Grid>
       </Grid>
     </>
   )
 }
 export function logout(activeUser) {
-  console.log("loggar ut ", activeUser)
-
+  activeUser.activeUserDispatch({
+    payload: null,
+    type: USER_ACTIONS.LOGOUT
+  })
+}
+export function debugChangeUser(activeUser) {
+  console.log("changeuser activeUser: ", activeUser)
+  console.log("byter ", activeUser.activeUser.userId)
+    if (activeUser.activeUser.userId === 1) {
     activeUser.activeUserDispatch({
     payload: {
-      userId: null,
-      firstName: null,
-      lastName: null,
+      userId: 2,
+      firstName: "Tvåan",
+      lastName: "Twosie",
       bookings: [{}]
     },
-    type: USER_ACTIONS.LOGOUT
+    type: USER_ACTIONS.LOGIN
     })
-    console.log("loggat ut...? ", activeUser)
+  } else if (activeUser.activeUser.userId === 2) {
+    activeUser.activeUserDispatch({
+      payload: {
+        userId: 1,
+        firstName: "EttanIgen",
+        lastName: "LOLOLO",
+        bookings: [{}]
+      },
+      type: USER_ACTIONS.LOGIN
+      })
+    }
+    console.log("bytt? ", activeUser.activeUser.userId)
 }
 export default Navbarcomponent
