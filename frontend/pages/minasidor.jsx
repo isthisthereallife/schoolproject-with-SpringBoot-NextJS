@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button } from '@material-ui/core'
+import { Button, Grid } from '@material-ui/core'
 import { FaRegCalendarPlus, FaCalendarDay, FaArrowRight } from 'react-icons/fa'
 import Link from 'next/link'
 import styles from '../styles/index.module.css'
@@ -32,13 +32,27 @@ function MyPages(userBookings) {
 
   return <>
     <div className={styles.main}>
-      <h1>Du är inloggad som {activeUser.activeUser.firstName} {activeUser.activeUser.lastName}</h1>
+    <Grid container className={styles.navbar}>
+        <Grid item xs={12}>
+      <h5>Du är inloggad som {activeUser.activeUser.firstName} {activeUser.activeUser.lastName}</h5>
+      </Grid>
+      <Grid container direction="row"
+  justifyContent="space-between"
+  alignItems="flex-start" >
+        <Grid><Grid item xs={6}>Adress:</Grid><Grid item xs={6}> blablablabl 33{activeUser.activeUser.address}</Grid></Grid>
+        <Grid><Grid item xs={6}>Telefon:</Grid><Grid item xs={6}> 08494988844{activeUser.activeUser.phone}</Grid></Grid>
+        <Grid><Grid item xs={6}>Email:</Grid><Grid item xs={6} >thrcoochu@ch;unh.coher{activeUser.activeUser.email}</Grid></Grid>
+        <Grid><Grid item xs={6}>Password:</Grid><Grid item xs={6} >******</Grid></Grid>
+      </Grid>
+
+      </Grid>
       {/* <h2><MinaSidor /></h2> */}
 
       <button onClick={MinaSidorComponent.updateUser}>Ändra</button>
 
       <h2>Mina bokningar</h2>
       <Minabokningarcomponent data={bookings} />
+
       <div>Boka fler städningar: <Link href="/booking">Bokning</Link></div>
     </div>
   </>
