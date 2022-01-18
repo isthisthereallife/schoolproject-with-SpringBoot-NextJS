@@ -15,18 +15,18 @@ function Navbarcomponent() {
       <Grid container className={styles.navbar}>
         <Grid item xs={2}>
           <Link item href="/">
-          <p className="navbar-brand">Hem{activeUser.activeUser.firstname}</p>
+          <p className="navbar-brand">Start{activeUser.activeUser.firstname}</p>
           </Link>
         </Grid>
 
         <Grid item xs={2}>
-          <Link href="/minabokningar">
+          <Link href="/minasidor">
           <p className="nav-link">Mina sidor</p>
           </Link>
         </Grid>
         <Grid item xs={2}>
           <Link href="/boka">
-            <p className="nav-link">Boka</p>
+            <p className="nav-link">Gör en bokning</p>
           </Link>
         </Grid>
         <Grid item xs={2}>

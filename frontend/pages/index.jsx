@@ -12,7 +12,7 @@ function HomePage() {
     <h1>Inloggningssida</h1>
 
     <Button className={styles.button} variant="contained" startIcon={<FaArrowRight/>}>Logga in</Button>
-    <Button className={styles.button} variant="contained" startIcon={<FaCalendarDay/>}><Link href="/minabokningar">MINA BOKNINGAR</Link></Button>
+    {/* <Button className={styles.button} variant="contained" startIcon={<FaCalendarDay/>}><Link href="/minabokningar">MINA BOKNINGAR</Link></Button> */}
     <Button className={styles.button} variant="contained" startIcon={<FaRegCalendarPlus/>}><Link href="/boka">bokning</Link></Button>
     </div>
 
