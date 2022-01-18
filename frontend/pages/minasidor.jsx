@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Grid } from '@material-ui/core'
+import { Button, Grid, ListItem } from '@material-ui/core'
 import { FaRegCalendarPlus, FaCalendarDay, FaArrowRight } from 'react-icons/fa'
 import Link from 'next/link'
-import styles from '../styles/index.module.css'
+import styles from '../styles/minasidor.module.css'
 import Minabokningarcomponent from '../components/minabokningarcomponent'
 import MinaSidorComponent from '../components/minasidorcomponent'
 import useActiveUser from '../lib/hooks/useActiveUser'
@@ -34,15 +34,15 @@ function MyPages(userBookings) {
     <div className={styles.main}>
     <Grid container className={styles.navbar}>
         <Grid item xs={12}>
-      <h5>Du är inloggad som {activeUser.activeUser.firstName} {activeUser.activeUser.lastName}</h5>
+      <h5>Du är inloggad som: </h5>
       </Grid>
-      <Grid container direction="row"
-  justifyContent="space-between"
-  alignItems="flex-start" >
-        <Grid><Grid item xs={6}>Adress:</Grid><Grid item xs={6}> blablablabl 33{activeUser.activeUser.address}</Grid></Grid>
-        <Grid><Grid item xs={6}>Telefon:</Grid><Grid item xs={6}> 08494988844{activeUser.activeUser.phone}</Grid></Grid>
-        <Grid><Grid item xs={6}>Email:</Grid><Grid item xs={6} >thrcoochu@ch;unh.coher{activeUser.activeUser.email}</Grid></Grid>
-        <Grid><Grid item xs={6}>Password:</Grid><Grid item xs={6} >******</Grid></Grid>
+      <Grid container className={styles.user_info_grid}>
+
+        <ListItem className={styles.user_info_item}><Grid item xs={3}>Namn:</Grid><Grid item xs={6}> {activeUser.activeUser.firstName} {activeUser.activeUser.lastName}</Grid></ListItem>
+        <ListItem className={styles.user_info_item}><Grid item xs={3}>Adress:</Grid><Grid item xs={6}> blablablabl 33{activeUser.activeUser.address}</Grid></ListItem>
+        <ListItem className={styles.user_info_item}><Grid item xs={3}>Telefon:</Grid><Grid item xs={6}> 08494988844{activeUser.activeUser.phone}</Grid></ListItem>
+        <ListItem className={styles.user_info_item}><Grid item xs={3}>Email:</Grid><Grid item xs={6} >thrcoochu@ch;unh.coher{activeUser.activeUser.email}</Grid></ListItem>
+        <ListItem className={styles.user_info_item}><Grid item xs={3}>Password:</Grid><Grid item xs={6} >**********</Grid></ListItem>
       </Grid>
 
       </Grid>
