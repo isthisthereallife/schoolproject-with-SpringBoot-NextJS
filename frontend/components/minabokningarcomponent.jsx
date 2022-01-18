@@ -36,7 +36,7 @@ export default function MinabokningarComponent({ data }) {
 
         <Grid className={styles.gridcontainer} container spacing={2}>
           {console.log("bookings i returen: ", bookings)}
-        {bookings && bookings[0].booking_id === null && bookings.map((booking) => (
+        {bookings && bookings.map((booking) => (
             <Link key={ booking.booking_id} href={`/bokning/${booking.booking_id.toString()}`}>
               <Grid className={styles.bookingcard} key={booking.booking_id} item container xs={6} md={4} lg={2} spacing={1}>
 
