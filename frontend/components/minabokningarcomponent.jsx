@@ -21,11 +21,18 @@ export default function MinabokningarComponent({ data }) {
   const [bookings, setBookings] = useState(data.userBookings)
 
   useEffect(() => {
-    console.log("useeffect reloadBooknigs")
-    console.log("innan", bookings)
     getUserBookings(activeUser).then((booking) => setBookings(booking))
-    console.log("efter", bookings)
   }, [activeUser])
+  console.log("book", bookings)
+  if (!bookings || !bookings[0]) {
+    return (
+      <>
+      <div>
+        <h3>Inga bokningar gjorda</h3>
+        </div>
+        </>
+    )
+  }
   return (
     <>
       <div>
@@ -35,7 +42,6 @@ export default function MinabokningarComponent({ data }) {
         </div>
 
         <Grid className={styles.gridcontainer} container spacing={2}>
-          {console.log("bookings i returen: ", bookings)}
         {bookings && bookings.map((booking) => (
             <Link key={ booking.booking_id} href={`/bokning/${booking.booking_id.toString()}`}>
               <Grid className={styles.bookingcard} key={booking.booking_id} item container xs={6} md={4} lg={2} spacing={1}>
@@ -62,7 +68,6 @@ async function reloadBookings(userId) {
   if (userId) {
   let res = await fetch(`http://localhost:8080/booking/get/user/${userId}`)
   let userBookings = await res.json()
-  console.log("reload", userBookings)
   return userBookings
   }
    return {}
