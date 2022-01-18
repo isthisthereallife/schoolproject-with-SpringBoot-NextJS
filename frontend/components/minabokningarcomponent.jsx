@@ -32,12 +32,17 @@ export default function MinabokningarComponent({ data }) {
 
         <Grid className={styles.gridcontainer} container spacing={2}>
         {bookings && bookings.map((booking) => (
-          <Grid className={styles.bookingcard} key={booking.booking_id} item container xs={6} md={4} lg={2} spacing={1}>
-            <ListItem key={booking.booking_id}>BokningsID: #{booking.booking_id}</ListItem>
-            <ListItem>📆{booking.datetime}🕙</ListItem>
-            <ListItem>Städtyp: {booking.type_of_service}</ListItem>
-            <ListItem> Status: {booking.status}</ListItem>
-        </Grid>
+          <>
+            <Link key={ booking.booking_id} href={`/bokning/${booking.booking_id.toString()}`}>
+              <Grid className={styles.bookingcard} key={booking.booking_id} item container xs={6} md={4} lg={2} spacing={1}>
+
+                <ListItem key={booking.booking_id}>BokningsID: #{booking.booking_id}</ListItem>
+                <ListItem>📆{booking.datetime}🕙</ListItem>
+                <ListItem>Städtyp: {booking.type_of_service}</ListItem>
+                <ListItem> Status: {booking.status}</ListItem>
+            </Grid>
+          </Link>
+        </>
         ))}
         </Grid>
 
