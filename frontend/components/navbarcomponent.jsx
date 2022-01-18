@@ -14,22 +14,30 @@ function Navbarcomponent() {
       <Grid container className={styles.navbar}>
         <Grid item xs={2}>
           <Link item href="/">
-          <p className="navbar-brand">Start{activeUser.activeUser.firstname}</p>
+          <p className="navbar-brand">Start</p>
           </Link>
         </Grid>
-
+        {activeUser.activeUser
+        ? <>
         <Grid item xs={2}>
           <Link href="/minasidor">
           <p className="nav-link">Mina sidor</p>
           </Link>
         </Grid>
+
         <Grid item xs={2}>
           <Link href="/boka">
             <p className="nav-link">Gör en bokning</p>
           </Link>
         </Grid>
+        </> : ""}
         <Grid item xs={2}>
-          <Button onClick={() => debugChangeUser(activeUser)} variant="contained">Växla användare</Button>
+          {(activeUser.activeUser
+          ? <Button onClick={() => logout(activeUser)} variant="contained">Logga ut</Button>
+            : "")}
+
+          <Button onClick={() => debugChangeUser(activeUser)} variant="contained">
+            {(activeUser.activeUser ? "Växla användare" : "Logga in")}</Button>
         </Grid>
       </Grid>
     </>
@@ -41,10 +49,12 @@ export function logout(activeUser) {
     type: USER_ACTIONS.LOGOUT
   })
 }
+
+/*
+ * det här kan vi använda som template.
+ */
 export function debugChangeUser(activeUser) {
-  console.log("changeuser activeUser: ", activeUser)
-  console.log("byter ", activeUser.activeUser.userId)
-    if (activeUser.activeUser.userId === 1) {
+    if (activeUser.activeUser && activeUser.activeUser.userId === 1) {
     activeUser.activeUserDispatch({
     payload: {
       userId: 2,
@@ -54,17 +64,26 @@ export function debugChangeUser(activeUser) {
     },
     type: USER_ACTIONS.LOGIN
     })
-  } else if (activeUser.activeUser.userId === 2) {
+  } else if (activeUser.activeUser && activeUser.activeUser.userId === 2) {
     activeUser.activeUserDispatch({
       payload: {
-        userId: 1,
-        firstName: "EttanIgen",
-        lastName: "LOLOLO",
+        userId: 3,
+        firstName: "Trean",
+        lastName: "Oboken",
         bookings: [{}]
       },
       type: USER_ACTIONS.LOGIN
       })
-    }
-    console.log("bytt? ", activeUser.activeUser.userId)
+    } else {
+      activeUser.activeUserDispatch({
+        payload: {
+          userId: 1,
+          firstName: "EttanIgen",
+          lastName: "LOLOLO",
+          bookings: [{}]
+        },
+        type: USER_ACTIONS.LOGIN
+        })
+      }
 }
 export default Navbarcomponent

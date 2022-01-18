@@ -23,7 +23,6 @@ export default function MinabokningarComponent({ data }) {
   useEffect(() => {
     getUserBookings(activeUser).then((booking) => setBookings(booking))
   }, [activeUser])
-  console.log("book", bookings)
   if (!bookings || !bookings[0]) {
     return (
       <>

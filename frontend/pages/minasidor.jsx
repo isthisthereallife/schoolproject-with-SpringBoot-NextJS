@@ -15,10 +15,20 @@ function MyPages(userBookings) {
 
 
     useEffect(() => {
-      console.log("minasidor useEffect activeUser.activeUser", activeUser.activeUser)
+      if (activeUser.activeUser) {
       if (!loaded) getUserBookings(activeUser).then((eachBooking) => setBookings(eachBooking))
       setLoaded(true)
+      }
     }, [loaded, activeUser])
+
+    if (!activeUser.activeUser) {
+      return (<>
+      <div>
+        <h1>Utloggad</h1>
+        </div>
+        </>
+        )
+    }
 
   return <>
     <div className={styles.main}>
@@ -48,7 +58,6 @@ async function reloadProps(id) {
 export async function getStaticProps() {
   const response = await fetch(`http://localhost:8080/booking/get/user/1`)
   const userBookings = await response.json()
-  console.log("returnerar detta från getStaticProps: ", userBookings)
   return { props: { userBookings } }
 }
 
