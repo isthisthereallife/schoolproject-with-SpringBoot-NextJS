@@ -12,6 +12,7 @@ const ActiveUserProvider = ({ children }) => {
     userId: 1,
     firstName: "[sätt i activeUserProvider]",
     lastName: "lastname",
+    address: "here 123",
     bookings: [{}]
   })
 

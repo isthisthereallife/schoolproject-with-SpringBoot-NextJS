@@ -17,16 +17,18 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-@Bean
-    public PasswordEncoder passwordEncoder(){
+    @Bean
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    @Override protected void configure(HttpSecurity http) throws Exception{
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
         System.out.println("test");
-    http.
+        http.
                 csrf().disable()
-                .authorizeRequests().antMatchers("/booking/get/user/*","/booking/add","/booking/add/*","booking/*")
-                .permitAll() .anyRequest().authenticated()
+                .authorizeRequests().antMatchers("/customer/*", "/customer*", "/customer/*/*", "/booking/get/user/*", "/booking/add", "/booking/get/all", "customer/update", "booking/*")
+                .permitAll().anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login" /*"http://localhost:3000/login"*/)
@@ -37,9 +39,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .clearAuthentication(true)
                 .permitAll();
     }
+
     @Bean
     @Override
-    public UserDetailsService userDetailsService(){
+    public UserDetailsService userDetailsService() {
         //user role
         UserDetails theUser = User.withUsername("testy")
                 .passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder()::encode)

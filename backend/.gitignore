@@ -15,7 +15,6 @@ backend/target/
 
 ### IntelliJ IDEA ###
 /src/main/resources/application.properties
-src/main/resources/*
 .properties
 /.idea
 .idea

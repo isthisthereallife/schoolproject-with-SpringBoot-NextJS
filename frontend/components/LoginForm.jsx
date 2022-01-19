@@ -22,7 +22,7 @@ export default function LoginForm() {
   })
 
     return (
-      <form onSubmit={handleSubmit}>
+      <form>
         <div>
           <input type="username"
           name="username"
@@ -38,7 +38,7 @@ export default function LoginForm() {
           onChange={handleChange}
           />
         </div>
-        <button type="submit" >Submit</button>
+        <button type="submit">Submit</button>
       </form>
 
     )

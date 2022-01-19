@@ -64,6 +64,7 @@ export function debugChangeUser(activeUser) {
       userId: 2,
       firstName: "Tvåan",
       lastName: "Twosie",
+      address: "here 123",
       bookings: [{}]
     },
     type: USER_ACTIONS.LOGIN
@@ -74,6 +75,7 @@ export function debugChangeUser(activeUser) {
         userId: 3,
         firstName: "Trean",
         lastName: "Oboken",
+        address: "here 123",
         bookings: [{}]
       },
       type: USER_ACTIONS.LOGIN
@@ -84,6 +86,7 @@ export function debugChangeUser(activeUser) {
           userId: 1,
           firstName: "EttanIgen",
           lastName: "LOLOLO",
+          address: "here 123",
           bookings: [{}]
         },
         type: USER_ACTIONS.LOGIN

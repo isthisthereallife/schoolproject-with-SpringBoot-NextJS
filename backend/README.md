@@ -12,6 +12,9 @@ Backend för Städa Fint AB
 
 ADD
 - /booking/add
+  (e.g.
+    localhost:8080/booking/add
+    )
 
 GET
 - /booking/get/all
