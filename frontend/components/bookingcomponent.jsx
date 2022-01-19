@@ -3,7 +3,9 @@ import 'react-datepicker/dist/react-datepicker.css'
 import DatePicker, { registerLocale } from 'react-datepicker'
 import styles from '../styles/Bookingcomponent.module.css'
 import sv from 'date-fns/locale/sv'
+import useActiveUser from '../lib/hooks/useActiveUser'
 import Link from 'next/link'
+import { Button } from '@material-ui/core'
 
 registerLocale('sv', sv)
 
@@ -13,8 +15,13 @@ registerLocale('sv', sv)
  */
 
 export default function Bookingcomponent() {
+const activeUser = useActiveUser()
 const [datePicked, setDatePicked] = useState(new Date())
+const [typeOfService, setTypeOfService] = useState("Standard")
 
+const bookingEvent = ((event) => {
+  postBooking(datePicked, typeOfService, activeUser)
+})
 return (
   <>
   <div className={styles.main}>
@@ -39,9 +46,31 @@ return (
       </div>
     </div>
     <div className={styles.bookingbuttondiv}>
-      <button className={styles.bookingbutton}><Link href="/confirmation">Boka</Link></button>
+      <Button variant="contained" onClick={bookingEvent} className={styles.bookingbutton}>Boka</Button>
     </div>
   </div>
 </>
 )
+}
+
+export async function postBooking(datePicked, typeOfService, activeUser) {
+  
+  const a = {
+    cleaner_id: 1,
+    customer_id: activeUser.activeUser.userId,
+    datetime: datePicked,
+    type_of_service: typeOfService,
+    address: "" }
+    
+  let request = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(a)
+  }
+  console.log("my request", request)
+  const res = await fetch('localhost:8080/booking/add', request).
+  then((response) => response.json())
+
 }
