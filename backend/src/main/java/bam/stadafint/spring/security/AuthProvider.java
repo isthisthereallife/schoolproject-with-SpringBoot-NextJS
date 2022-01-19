@@ -4,7 +4,7 @@ import bam.stadafint.entities.Attempts;
 import bam.stadafint.entities.User;
 import bam.stadafint.repositories.AttemptsRepository;
 import bam.stadafint.repositories.UserRepository;
-import bam.stadafint.service.SecurityUserDetailsService;
+import bam.stadafint.service.SecurityUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.LockedException;
@@ -20,13 +20,18 @@ public class AuthProvider implements AuthenticationProvider {
     private static final int ATTEMPTS_LIMIT = 3;
 
     @Autowired
-    private SecurityUserDetailsService userDetailsService;
-    @Autowired private PasswordEncoder passwordEncoder;
-    @Autowired private AttemptsRepository attemptsRepository;
-    @Autowired private UserRepository userRepository;
+    private SecurityUserDetailsServiceImpl userDetailsService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AttemptsRepository attemptsRepository;
+    @Autowired
+    private UserRepository userRepository;
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+
         String username = authentication.getName();
+
         Optional<Attempts> userAttempts = attemptsRepository
                 .findAttemptsByUsername(username);
         if (userAttempts.isPresent()) {

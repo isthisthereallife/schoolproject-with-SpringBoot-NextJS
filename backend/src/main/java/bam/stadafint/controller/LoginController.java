@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
-import bam.stadafint.service.SecurityUserDetailsService;
+import bam.stadafint.service.SecurityUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import bam.stadafint.entities.User;
 @Controller
 public class LoginController {
-    @Autowired private SecurityUserDetailsService userDetailsManager;
+    @Autowired private SecurityUserDetailsServiceImpl userDetailsManager;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
