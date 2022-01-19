@@ -5,6 +5,7 @@ import { Grid, ListItem } from '@material-ui/core'
 import { USER_ACTIONS } from '../lib/reducers/activeUserReducer'
 import styles from '../styles/minabokningarcomponent.module.css'
 import { format, toDate } from 'date-fns'
+import Link from 'next/link'
 
 MinabokningarComponent.propTypes = {
   data: PropTypes.object
