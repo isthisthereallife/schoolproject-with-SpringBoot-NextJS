@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `stada_fint` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `stada_fint`;
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
 -- Host: localhost    Database: stada_fint
@@ -18,6 +16,31 @@ USE `stada_fint`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `attempts`
+--
+
+DROP TABLE IF EXISTS `attempts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `attempts` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) NOT NULL,
+  `attempts` varchar(45) NOT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `attempts`
+--
+
+LOCK TABLES `attempts` WRITE;
+/*!40000 ALTER TABLE `attempts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `attempts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `booking`
 --
 
@@ -32,14 +55,13 @@ CREATE TABLE `booking` (
   `cleaner_id` int NOT NULL,
   `status` varchar(50) NOT NULL,
   `datetime` varchar(255) DEFAULT NULL,
-  `bookingcol` varchar(45) DEFAULT NULL,
-  `description` varchar(45) NOT NULL,
+  `description` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`booking_id`),
   KEY `fk_customer` (`customer_id`),
   KEY `fk_cleaner` (`cleaner_id`),
   CONSTRAINT `fk_cleaner` FOREIGN KEY (`cleaner_id`) REFERENCES `cleaner` (`cleaner_id`),
   CONSTRAINT `fk_customer` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +70,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (1,'Basic','Gågatan 5B',1,1,'Bokad','20220109 1000',NULL,''),(2,'Fönstertvätt','Vinarevägen 8',2,2,'Obekräftad','20220109 1300',NULL,'');
+INSERT INTO `booking` VALUES (1,'Basic','Gågatan 5B',1,1,'Bokad','2022-01-23T17:55:16.000Z',''),(2,'Fönstertvätt','Vinarevägen 8',2,2,'Obekräftad','2022-11-21T14:00:00.000Z',''),(3,'Standard','Adressvägen 3',1,1,'Bokad','2021-04-22T12:00:00.000Z',''),(4,'Standard','Gatan 32',1,2,'Ok','2022-02-03T13:00:00.000Z','It\'s nice'),(5,'Standard','hemma 223',1,1,'Obekräftad','2022-02-23T16:15:00.000Z',NULL),(6,'Standard','hemma 223',1,1,'Obekräftad','2024-02-23T16:15:00.000Z',NULL),(9,'Diamantstäd','hemma 223',2,1,'Obekräftad','2024-03-21T16:14:00.000Z',NULL),(10,'Diamantstäd','hemma 223',2,1,'Obekräftad','2024-03-21T16:14:00.000Z',NULL),(11,'Diamantstäd','hemma 223',2,1,'Obekräftad','2024-03-21T16:14:00.000Z',NULL),(12,'Diamantstäd','hemma 223',2,1,'Obekräftad','2024-03-21T16:14:00.000Z',NULL),(13,'Diamantstäd','hemma 223',2,1,'Obekräftad','2024-03-21T16:14:00.000Z',NULL),(14,'Diamantstäd','hemma 223',2,1,'Obekräftad','2022-01-28T17:30:00.000Z',NULL),(15,'Standard','here 123',1,1,'Obekräftad','2022-01-19T17:45:00.000Z',NULL),(16,'Standard','here 123',1,1,'Obekräftad','2022-01-06T17:15:00.000Z',NULL),(17,'Standard','here 123',1,1,'Obekräftad','2021-12-31T16:45:00.000Z',NULL),(18,'Standard','here 123',1,1,'Obekräftad','2021-12-16T17:45:00.000Z',NULL),(19,'Standard','here 123',1,1,'Obekräftad','2021-12-11T17:15:00.000Z',NULL),(20,'Standard','here 123',1,1,'Obekräftad','2021-12-31T00:00:00.000Z',NULL),(21,'Standard','here 123',1,1,'Obekräftad','2022-03-19T00:00:00.000Z',NULL);
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,9 +114,13 @@ CREATE TABLE `customer` (
   `last_name` varchar(45) NOT NULL,
   `address` varchar(45) NOT NULL,
   `e_mail` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `account_non_locked` tinyint(1) NOT NULL DEFAULT '1',
+  `account_access_lvl` varchar(45) NOT NULL DEFAULT 'user',
+  `username` varchar(45) NOT NULL,
   PRIMARY KEY (`customer_id`),
   UNIQUE KEY `customer_id_UNIQUE` (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +129,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'Anders','Andersson','Gågatan 5','anders@anders.com'),(2,'Fia','Johansson','Stockholmsvägen 3','fia@fia.com'),(3,'Carl-Oskar','Svensson','Stenvägen 3','calle@calle.com');
+INSERT INTO `customer` VALUES (1,'Anders','Andersson','Gågatan 5','anders@anders.com','',1,'user',''),(2,'Fia','Johansson','Stockholmsvägen 3','fia@fia.com','',1,'user',''),(3,'Carl-Oskar','Svensson','Stenvägen 3','calle@calle.com','',1,'user',''),(4,'Steffe','Stol','Baba 2','st@ff.e','xxx',1,'user',''),(5,'Benny','Bil','Tnnno 32','bbob@ff.e','x33xx',1,'user',''),(6,'Andy','Admino','Adder 32','aahb@ff.e','nhrch89',1,'admin','');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,6 +143,7 @@ SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `get_my_bookings` AS SELECT 
  1 AS `boknings_id`,
+ 1 AS `customer_id`,
  1 AS `kundnamn_fornamn`,
  1 AS `kundnamn_efternamn`,
  1 AS `address`,
@@ -124,6 +151,31 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `description`,
  1 AS `status`*/;
 SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user` (
+  `username` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `account_non_locked` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES ('lalalaal','12345',1),('låsis','12345',0),('steffe','12345',1),('testy','12345',1);
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Final view structure for view `get_my_bookings`
@@ -138,7 +190,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `get_my_bookings` AS select `b`.`booking_id` AS `boknings_id`,`cus`.`first_name` AS `kundnamn_fornamn`,`cus`.`last_name` AS `kundnamn_efternamn`,`cus`.`address` AS `address`,`b`.`datetime` AS `date_and_time`,`b`.`description` AS `description`,`b`.`status` AS `status` from (`booking` `b` join `customer` `cus` on((`cus`.`customer_id` = `b`.`customer_id`))) */;
+/*!50001 VIEW `get_my_bookings` AS select `b`.`booking_id` AS `boknings_id`,`cus`.`customer_id` AS `customer_id`,`cus`.`first_name` AS `kundnamn_fornamn`,`cus`.`last_name` AS `kundnamn_efternamn`,`cus`.`address` AS `address`,`b`.`datetime` AS `date_and_time`,`b`.`description` AS `description`,`b`.`status` AS `status` from (`booking` `b` join `customer` `cus` on((`cus`.`customer_id` = `b`.`customer_id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -152,4 +204,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-12 11:46:19
+-- Dump completed on 2022-01-19 20:17:31
