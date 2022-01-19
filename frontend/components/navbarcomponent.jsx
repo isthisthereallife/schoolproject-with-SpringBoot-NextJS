@@ -31,7 +31,7 @@ function Navbarcomponent() {
             <p className="nav-link">Gör en bokning</p>
           </Link>
         </Grid>
-        </> : ""}
+        </> : <Grid item xs={4}></Grid>}
         <Grid className={styles.loginLogoutBtn} item xs={4}>
           {(activeUser.activeUser
           ? <Button onClick={() => logout(activeUser)} variant="contained">Logga ut</Button>
