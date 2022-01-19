@@ -23,8 +23,11 @@ function HomePage() {
     ? <Button className={styles.button} variant="contained" startIcon={<FaRegCalendarPlus/>}>
         <Link href="/boka">bokning</Link>
       </Button>
-    : <Button className={styles.button} onClick={debugLogin} variant="contained" startIcon={<FaArrowRight/>}>Logga in</Button>)}
-    <button><Link href="/registeruser">Registrera användare</Link></button>
+    : <>
+        <Button className={styles.button} onClick={debugLogin} variant="contained" startIcon={<FaArrowRight/>}>Logga in</Button>
+        <Link href="/registeruser" variant="contained"><Button className={styles.button}>Registrera användare</Button></Link></>
+        )}
+
     </div>
 
   </>

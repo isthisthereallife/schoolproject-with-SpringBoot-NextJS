@@ -19,32 +19,32 @@ export default function RegisterUserComponent() {
                 <TextField
                     required
                     id="outlined-required"
-                    label="Obligatoriskt"
-                    defaultValue="Förnamn"
+                    placeholder="Obligatoriskt"
+                    label="Förnamn"
                 />
                  <TextField
                     required
                     id="outlined-required"
-                    label="Obligatoriskt"
-                    defaultValue="Efternamn"
+                    placeholder="Obligatoriskt"
+                    label="Efternamn"
                 />
                  <TextField
                     required
                     id="outlined-required"
-                    label="Obligatoriskt"
-                    defaultValue="Adress"
+                    placeholder="Obligatoriskt"
+                    label="Adress"
                 />
                  <TextField
                     required
                     id="outlined-required"
-                    label="Obligatoriskt"
-                    defaultValue="E-postadress"
+                    placeholder="Obligatoriskt"
+                    label="E-postadress"
                 />
                  <TextField
                     required
                     id="outlined-required"
-                    label="Obligatoriskt"
-                    defaultValue="Telefonnummer"
+                    placeholder="Obligatoriskt"
+                    label="Telefonnummer"
                 />
          </Box>)
 }
