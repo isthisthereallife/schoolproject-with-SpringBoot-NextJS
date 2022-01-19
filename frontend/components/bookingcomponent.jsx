@@ -1,3 +1,4 @@
+/* eslint-disable no-negated-condition */
 import React, { useState } from 'react'
 import 'react-datepicker/dist/react-datepicker.css'
 import DatePicker, { registerLocale } from 'react-datepicker'
@@ -5,8 +6,7 @@ import styles from '../styles/Bookingcomponent.module.css'
 import sv from 'date-fns/locale/sv'
 import useActiveUser from '../lib/hooks/useActiveUser'
 import Link from 'next/link'
-import parseISO from 'date-fns'
-import { Button } from '@material-ui/core'
+import { Button, NativeSelect, FormControl, InputLabel } from '@material-ui/core'
 
 registerLocale('sv', sv)
 
@@ -17,22 +17,26 @@ registerLocale('sv', sv)
 
 export default function Bookingcomponent() {
 const activeUser = useActiveUser()
-console.log("acu", activeUser)
 const [datePicked, setDatePicked] = useState("")
-const [typeOfService, setTypeOfService] = useState("Standard")
+const [typeOfService, setTypeOfService] = useState("Basic Städning")
 const [description, setDescription] = useState("Det är ett stort hus")
-
+const [isBooked, setIsBooked] = useState(false)
 
 function datetimeEvent(date) {
   let ISODate = date
   setDatePicked(ISODate)
 }
-function bookingEvent (event) {
+
+function bookingEvent () {
   postBooking(datePicked, typeOfService, description, activeUser)
+  setIsBooked(true)
 }
 return (
   <>
-  <div className={styles.main}>
+    <div className={styles.main}>
+
+    {!isBooked ? (
+      <>
     <div>
       <h1 className={styles.headline}>Gör din bokning här</h1>
       <div className={styles.datepickerdiv}>
@@ -43,52 +47,56 @@ return (
         inline
         locale="sv"
         selected={datePicked}
-        onSelect={console.log(datePicked)}
         onChange={(date) => datetimeEvent(date)}
         showTimeSelect
         timeFormat="HH:mm"
         timeIntervals={15}
         timeCaption="Tid"
         dateFormat="d MMMM, yyyy H:mm"
+        htmlFor="uncontrolled-native"
       />
       </div>
     </div>
+    <div className={styles.valAvTjanstForm}>
+  <FormControl >
+  <InputLabel className={styles.valInputLabel} variant="standard" htmlFor="uncontrolled-native">
+    Val av tjänst
+  </InputLabel>
+  <NativeSelect
+    selected={typeOfService}
+    onChange={(value) => setTypeOfService(value.target.value)}
+
+    inputProps={{
+      name: 'ValAvTjanst',
+      id: 'uncontrolled-native'
+    }}
+  >
+    <option value="Basic Städning">Basic Städning</option>
+    <option value="Topp Städning">Topp Städning</option>
+    <option value="Diamant Städning">Diamant Städning</option>
+    <option value="Fönstertvätt">Fönstertvätt</option>
+  </NativeSelect>
+</FormControl>
+      </div>
     <div className={styles.bookingbuttondiv}>
       <Button variant="contained" onClick={bookingEvent} className={styles.bookingbutton}>Boka</Button>
+    </div></>)
+
+    : <div className={styles.confirmationdiv}>
+      <h3>Detta är din bokningsbekräftelse.</h3>
+      <div>Din städning kommer ske.
+      </div>
+      <div className={styles.backToStartButtondiv}>
+        <button className={styles.backToStartButton}><Link href="/">Tillbaka till startsidan</Link></button>
+      </div>
     </div>
+}
   </div>
 </>
 )
 }
 
-export async function postBooking(datePicked, typeOfService, description, activeUser) {
-  console.log("datepicked", datePicked)
-  console.log("acutu", activeUser)
-
-  const a = {
-    cleaner_id: 1,
-    customer_id: activeUser.activeUser.userId,
-    datetime: datePicked,
-    type_of_service: typeOfService,
-    address: activeUser.activeUser.address,
-    status: "Obekräftad",
-    description
-  }
-
-/*
- *     console.log("stringify", JSON.stringify(a))
- *   let request = {
- *     method: 'POST',
- *     headers: {
- *       'Content-Type': 'application/json; charset=UTF-8'
- *     },
- *     body: JSON.stringify(a)
- *   }
- *   console.log("my request", request)
- *   const res = await fetch('localhost:8080/booking/add', request)
- *   console.log(res)
- *  // then((response) => response.json())
- */
+export function postBooking(datePicked, typeOfService, description, activeUser) {
 
 
 let myHeaders = new Headers();

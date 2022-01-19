@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import useActiveUser from '../lib/hooks/useActiveUser'
 import { Grid, ListItem } from '@material-ui/core'
-import { USER_ACTIONS } from '../lib/reducers/activeUserReducer'
 import styles from '../styles/minabokningarcomponent.module.css'
-import { format, toDate } from 'date-fns'
+import { format } from 'date-fns'
 import Link from 'next/link'
 
 MinabokningarComponent.propTypes = {
@@ -18,12 +17,7 @@ export default function MinabokningarComponent({ data }) {
   const activeUser = useActiveUser()
   const [bookings, setBookings] = useState(data.userBookings)
   const datesplitter = ((datetime) => format(new Date(datetime), 'PPPP'))
-  const timespliteter = ((datetime) => format(new Date(datetime), 'XXx'))
-  function timesplitter(datetime) {
-    let t = new Date(datetime)
-    return `${t.getHours()}:${t.getUTCMinutes().toString().length > 1 ? t.getMinutes() : ("0".concat(t.getMinutes()))}`
 
-  }
   useEffect(() => {
     getUserBookings(activeUser).then((booking) => setBookings(booking))
   }, [activeUser])
@@ -42,7 +36,9 @@ export default function MinabokningarComponent({ data }) {
         </div>
 
         <Grid className={styles.gridcontainer} container spacing={2}>
-        {bookings && bookings.map((booking) => (
+
+          {bookings && bookings.map((booking) => (
+
             <Link key={ booking.booking_id} href={`/bokning/${booking.booking_id.toString()}`}>
               <Grid className={styles.bookingcard} key={booking.booking_id} item container xs={6} md={4} lg={2} spacing={1}>
 
@@ -53,7 +49,7 @@ export default function MinabokningarComponent({ data }) {
             </Grid>
           </Link>
 
-        ))}
+          ))}
         </Grid>
 
     </>
@@ -64,6 +60,12 @@ async function getUserBookings(activeUser) {
   return bookings
 
 }
+
+export function timesplitter(datetime) {
+    let t = new Date(datetime)
+    return `${t.getHours()}:${t.getUTCMinutes().toString().length > 1 ? t.getMinutes() : ("0".concat(t.getMinutes()))}`
+
+  }
 async function reloadBookings(userId) {
   if (userId) {
   let res = await fetch(`http://localhost:8080/booking/get/user/${userId}`)
