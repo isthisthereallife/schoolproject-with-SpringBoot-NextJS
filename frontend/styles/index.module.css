@@ -3,4 +3,8 @@
   flex-direction:column;
   background-color: blanchedalmond;
   height:100vh;
+  text-align: center;
+}
+.button{
+  margin-bottom:40px;
 }

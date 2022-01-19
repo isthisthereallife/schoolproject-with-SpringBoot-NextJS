@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories
 public class StadafintApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Throwable{
         SpringApplication.run(StadafintApplication.class, args);
     }
 

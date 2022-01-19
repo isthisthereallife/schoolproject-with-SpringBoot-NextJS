@@ -21,7 +21,7 @@ public class CleanerController {
         return "A new cleaner is added";
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/get/all")
     public List<Cleaner> list() {
         return cleanerService.getAllCleaners();
     }

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Navbar from '../components/navbar'
+import ActiveUserProvider from '../components/context/activeUserProvider'
+import Navbarcomponent from '../components/navbarcomponent'
 import UserSignUp from '../components/registerusercomponent'
 StadaFint.propTypes = {
   Component: PropTypes.func,
@@ -10,12 +11,11 @@ StadaFint.propTypes = {
 function StadaFint({ Component, pageProps }) {
   return (
     <>
-    <Navbar />
+    <ActiveUserProvider>
+    <Navbarcomponent />
     <Component {...pageProps}/>
-    <UserSignUp />
+    </ActiveUserProvider>
     </>
   )
 }
-
-
 export default StadaFint

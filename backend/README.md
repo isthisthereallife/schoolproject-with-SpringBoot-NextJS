@@ -14,12 +14,15 @@ ADD
 - /booking/add
 
 GET
-- /booking/getAll
+- /booking/get/all
+- /booking/get/id/{bookingid}
+- /booking/get/user/{customerid}
 
 DELETE
 - /booking/delete/{bookingid} 
 
-(e.g. localhost:8080/booking/getAll)
+(e.g.   localhost:8080/booking/get/all
+        localhost:8080/booking/get/user/1)
 #### Customer
 
 - /customer
@@ -28,7 +31,7 @@ ADD
 - /customer/add
 
 GET
-- /customer/getAll
+- /customer/get/all
      
 ####Cleaner
 - /cleaner
@@ -37,7 +40,7 @@ ADD
 - /cleaner/add
 
 GET
-- /cleaner/getAll
+- /cleaner/get/all
 
   -
 - -
