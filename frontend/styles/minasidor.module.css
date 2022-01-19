@@ -1,0 +1,20 @@
+.main{
+  display:flex;
+  flex-direction:column;
+  background-color: blanchedalmond;
+  height:100vh;
+  text-align: center;
+}
+
+.user_info_grid{
+  display:flex;
+  direction:column;
+  justify-content:space-between;
+  align-items:flex-start; 
+}
+.user_info_grid li{
+  padding:2px;
+}
+.user_info_styling{
+  padding:1px;
+}

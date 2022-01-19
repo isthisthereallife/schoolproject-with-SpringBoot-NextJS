@@ -3,9 +3,6 @@
   border: 1px solid black;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.bookingcard *{
-  margin: -5px;
-}
 
 .bookingcard:active{
   background-color: rgb(255, 244, 231);
@@ -15,5 +12,18 @@
   background-color: yellow;
 }
 .gridcontainer{
-  padding: 1vw;
+  padding: 3vw;
+  
+  justify-content: flex-start;
+}
+.listitem{
+  font-size:small;
+  flex-direction: column;
+  display:flex;
+  justify-content: center;
+  text-align: center;
+  font-weight: 600;
+}
+.listitem div{
+  text-align:center;
 }
