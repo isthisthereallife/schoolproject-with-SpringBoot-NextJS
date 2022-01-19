@@ -69,10 +69,11 @@ async function reloadProps(id) {
   return { data }
 }
 
-export async function getStaticProps() {
-  const response = await fetch(`http://localhost:8080/booking/get/user/1`)
-  const userBookings = await response.json()
-  return { props: { userBookings } }
-}
+// export async function getStaticProps() {
+//   const response = await fetch(`http://localhost:8080/booking/get/user/1`)
+//   console.log("THIS IS THE RESPONSE", response)
+//   const userBookings = await response.json()
+//   return { props: { userBookings } }
+// }
 
 export default MyPages

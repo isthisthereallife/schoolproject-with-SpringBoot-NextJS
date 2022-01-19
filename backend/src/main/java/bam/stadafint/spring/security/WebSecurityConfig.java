@@ -22,13 +22,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
     @Override protected void configure(HttpSecurity http) throws Exception{
-        http.
+        System.out.println("test");
+    http.
                 csrf().disable()
-                .authorizeRequests().antMatchers("/register**","/booking**","/booking*","booking/user/*","booking/get/all")
+                .authorizeRequests().antMatchers("/booking/get/user/*")
                 .permitAll() .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/login" /*"http://localhost:3000/login"*/)
                 .permitAll()
                 .and()
                 .logout()
