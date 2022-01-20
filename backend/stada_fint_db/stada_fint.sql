@@ -61,7 +61,7 @@ CREATE TABLE `booking` (
   KEY `fk_cleaner` (`cleaner_id`),
   CONSTRAINT `fk_cleaner` FOREIGN KEY (`cleaner_id`) REFERENCES `cleaner` (`cleaner_id`),
   CONSTRAINT `fk_customer` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (1,'Basic','Gågatan 5B',1,1,'Bokad','2022-01-23T17:55:16.000Z',''),(2,'Fönstertvätt','Vinarevägen 8',2,2,'Obekräftad','2022-11-21T14:00:00.000Z',''),(3,'Standard','Adressvägen 3',1,1,'Bokad','2021-04-22T12:00:00.000Z',''),(4,'Standard','Gatan 32',1,2,'Ok','2022-02-03T13:00:00.000Z','It\'s nice'),(5,'Standard','hemma 223',1,1,'Obekräftad','2022-02-23T16:15:00.000Z',NULL),(6,'Standard','hemma 223',1,1,'Obekräftad','2024-02-23T16:15:00.000Z',NULL),(9,'Diamantstäd','hemma 223',2,1,'Obekräftad','2024-03-21T16:14:00.000Z',NULL),(10,'Diamantstäd','hemma 223',2,1,'Obekräftad','2024-03-21T16:14:00.000Z',NULL),(11,'Diamantstäd','hemma 223',2,1,'Obekräftad','2024-03-21T16:14:00.000Z',NULL),(12,'Diamantstäd','hemma 223',2,1,'Obekräftad','2024-03-21T16:14:00.000Z',NULL),(13,'Diamantstäd','hemma 223',2,1,'Obekräftad','2024-03-21T16:14:00.000Z',NULL),(14,'Diamantstäd','hemma 223',2,1,'Obekräftad','2022-01-28T17:30:00.000Z',NULL),(15,'Standard','here 123',1,1,'Obekräftad','2022-01-19T17:45:00.000Z',NULL),(16,'Standard','here 123',1,1,'Obekräftad','2022-01-06T17:15:00.000Z',NULL),(17,'Standard','here 123',1,1,'Obekräftad','2021-12-31T16:45:00.000Z',NULL),(18,'Standard','here 123',1,1,'Obekräftad','2021-12-16T17:45:00.000Z',NULL),(19,'Standard','here 123',1,1,'Obekräftad','2021-12-11T17:15:00.000Z',NULL),(20,'Standard','here 123',1,1,'Obekräftad','2021-12-31T00:00:00.000Z',NULL),(21,'Standard','here 123',1,1,'Obekräftad','2022-03-19T00:00:00.000Z',NULL);
+INSERT INTO `booking` VALUES (68,'Fönstertvätt','here 123',1,1,'Bekräftad','2022-04-15T12:30:00.000Z',NULL),(69,'Fönstertvätt','here 123',1,1,'Obekräftad','2022-01-29T13:30:00.000Z',NULL),(70,'Diamantstäd','hemma 223',2,1,'Obekräftad','2024-03-21T16:14:00.000Z',NULL),(71,'Topp Städning','here 123',1,1,'Obekräftad','2022-01-30T14:02:15.000Z',NULL),(72,'Basic Städning','here 123',1,1,'Obekräftad','2022-01-21T14:02:32.300Z',NULL),(73,'Diamantstäd','hemma 223',2,1,'Obekräftad','2024-03-21T16:14:00.000Z',NULL),(81,'Fönstertvätt','Gågatan 5',1,1,'Obekräftad','2022-01-21T23:30:00.100Z',NULL),(82,'Topp Städning','Gågatan 5',1,1,'Obekräftad','2022-01-30T23:45:00.000Z',NULL);
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,6 +118,7 @@ CREATE TABLE `customer` (
   `account_non_locked` tinyint(1) NOT NULL DEFAULT '1',
   `account_access_lvl` varchar(45) NOT NULL DEFAULT 'user',
   `username` varchar(45) NOT NULL,
+  `phone` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`customer_id`),
   UNIQUE KEY `customer_id_UNIQUE` (`customer_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -129,7 +130,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'Anders','Andersson','Gågatan 5','anders@anders.com','',1,'user',''),(2,'Fia','Johansson','Stockholmsvägen 3','fia@fia.com','',1,'user',''),(3,'Carl-Oskar','Svensson','Stenvägen 3','calle@calle.com','',1,'user',''),(4,'Steffe','Stol','Baba 2','st@ff.e','xxx',1,'user',''),(5,'Benny','Bil','Tnnno 32','bbob@ff.e','x33xx',1,'user',''),(6,'Andy','Admino','Adder 32','aahb@ff.e','nhrch89',1,'admin','');
+INSERT INTO `customer` VALUES (1,'Anders','Andersson','Gågatan 5','anders@anders.com','xxx',1,'user','kundanders63','+46 73 63 74 837'),(2,'Fia','Johansson','Stockholmsvägen 3','fia@fia.com','xxx',1,'user','fia1337','031-38 29 437'),(3,'Carl-Oskar','Svensson','Stenvägen 3','calle@calle.com','xxx',1,'user','ca11e','074 4828 382'),(4,'Steffe','Stol','Baba 2','st@ff.e','xxx',1,'user','573FF3','+42 892 8 76367'),(5,'Benny','Bil','Tnnno 32','bbob@ff.e','xxx',1,'user','bennnny5555','+53 347828'),(6,'Andy','Admino','Adder 32','aahb@ff.e','admin',1,'admin','admin',NULL);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,4 +205,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-19 20:17:31
+-- Dump completed on 2022-01-21  0:14:37
