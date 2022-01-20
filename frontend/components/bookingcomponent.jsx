@@ -1,5 +1,5 @@
 /* eslint-disable no-negated-condition */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import 'react-datepicker/dist/react-datepicker.css'
 import DatePicker, { registerLocale } from 'react-datepicker'
 import styles from '../styles/Bookingcomponent.module.css'
@@ -21,15 +21,32 @@ const [datePicked, setDatePicked] = useState("")
 const [typeOfService, setTypeOfService] = useState("Basic Städning")
 const [description, setDescription] = useState("Det är ett stort hus")
 const [isBooked, setIsBooked] = useState(false)
+const [dayIsPassed, setDayIsPassed] = useState(false)
+
 
 function datetimeEvent(date) {
   let ISODate = date
   setDatePicked(ISODate)
 }
 
+useEffect(() => {
+  if (datePicked < new Date().getTime()) {
+  setDayIsPassed(true)
+} else {
+  setDayIsPassed(false)
+}
+}, [datePicked])
+
+useEffect(() => {
+  let newDate = new Date()
+  newDate.setDate(newDate.getDate() + 1)
+  setDatePicked(newDate)
+}, [])
+
 function bookingEvent () {
   postBooking(datePicked, typeOfService, description, activeUser)
   setIsBooked(true)
+
 }
 return (
   <>
@@ -49,6 +66,9 @@ return (
         selected={datePicked}
         onChange={(date) => datetimeEvent(date)}
         showTimeSelect
+        showDisabledMonthNavigation
+
+        /*showWeekNumbers*/
         timeFormat="HH:mm"
         timeIntervals={15}
         timeCaption="Tid"
@@ -78,9 +98,15 @@ return (
   </NativeSelect>
 </FormControl>
       </div>
-    <div className={styles.bookingbuttondiv}>
-      <Button variant="contained" onClick={bookingEvent} className={styles.bookingbutton}>Boka</Button>
-    </div></>)
+      {!dayIsPassed
+        ? <div className={styles.bookingbuttondiv}>
+          <Button variant="contained" onClick={bookingEvent} className={styles.bookingbutton}>Boka</Button>
+        </div>
+      : <div className={styles.bookingbuttondiv}>
+          <p>Välj en kommande dag</p>
+        </div>
+      }
+    </>)
 
     : <div className={styles.confirmationdiv}>
       <h3>Detta är din bokningsbekräftelse.</h3>

@@ -25,7 +25,7 @@ function HomePage() {
       </Button>
     : <>
         <Button className={styles.button} onClick={debugLogin} variant="contained" startIcon={<FaArrowRight/>}>Logga in</Button>
-        <Link href="/registeruser" variant="contained"><Button className={styles.button}>Registrera användare</Button></Link></>
+        <Link href="/registrering" variant="contained"><Button className={styles.button}>Registrera användare</Button></Link></>
         )}
 
     </div>

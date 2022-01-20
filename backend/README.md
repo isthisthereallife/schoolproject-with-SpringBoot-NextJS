@@ -34,8 +34,14 @@ ADD
 - /customer/add
 
 GET
-- /customer/get/all
+- GET one
+    /customer/get/id/1
+    ( http://localhost:8080/customer/get/id/${userId} )
+
+- GET all
+  /customer/get/all
      
+
 ####Cleaner
 - /cleaner
 

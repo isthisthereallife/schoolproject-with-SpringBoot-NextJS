@@ -8,6 +8,7 @@
   padding:8px 0 10px 0;
   justify-content: center;
   align-items:center;
+  user-select: none;
 }
 
 .navbar *{
@@ -20,6 +21,10 @@
   size: large;
   width: fit-content;
   height: fit-content;
+}
+.navbar_item{
+  cursor:pointer;
+  user-select: none;
 }
 .loginLogoutBtn *{
   size: 10px;
