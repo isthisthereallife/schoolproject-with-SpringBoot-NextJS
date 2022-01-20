@@ -2,10 +2,8 @@ import { React, createContext, useReducer } from 'react'
 import { userReducer } from '../../lib/reducers/activeUserReducer'
 import PropTypes from 'prop-types'
 
-
 // provider provides a context for the user
 export const ActiveUserContext = createContext()
-
 
 const ActiveUserProvider = ({ children }) => {
   const [activeUser, activeUserDispatch] = useReducer(userReducer, {
