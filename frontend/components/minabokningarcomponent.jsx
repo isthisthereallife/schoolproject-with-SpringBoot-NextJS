@@ -29,6 +29,7 @@ export default function MinabokningarComponent({ data }) {
   const [bookings, setBookings] = useState(data.userBookings)
   const datesplitter = ((datetime) => format(new Date(datetime), 'PPPP'))
   const [statusSelection, setStatusSelection] = useState("Alla")
+  const [selectedCards, setSelectedCards] = useState([{}])
 
   useEffect(() => {
     getUserBookings(activeUser).then((booking) => setBookings(booking))
@@ -46,8 +47,22 @@ export default function MinabokningarComponent({ data }) {
   }
 
   function cardClickEvent(item) {
-    console.log("hejj")
-    console.log(item)
+    let cards = []
+      selectedCards.forEach((card) => {
+      console.log("itemid", item.booking_id)
+      if (item.booking_id === card.booking_id) {
+        console.log("card already clicked")
+      } else {
+        cards.push(item)
+        console.log("PUSHED")
+      }
+      console.log("vaaad", cards)
+    })
+    if (cards.length < 1) {
+      cards.push(item)
+    }
+    setSelectedCards(cards)
+    console.log("sele", selectedCards)
   }
 
 

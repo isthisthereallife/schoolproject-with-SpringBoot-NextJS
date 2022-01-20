@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
+import { USER_ACTIONS } from '../lib/reducers/activeUserReducer'
+
 export default function LoginForm() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+
 
   const handleChange = ((event) => {
     if (event.target.name === "username") {
@@ -18,7 +21,7 @@ export default function LoginForm() {
     event.preventDefault()
     console.log("username:", username, "  password:", password)
 
-    
+
   })
 
     return (
@@ -43,3 +46,17 @@ export default function LoginForm() {
 
     )
   }
+
+
+export function login(activeUser) {
+  activeUser.activeUserDispatch({
+  payload: {
+    userId: "1",
+    firstName: "nyttnamn",
+    lastName: "kollaaa",
+    bookings: [{}]
+  },
+  type: USER_ACTIONS.LOGIN
+  })
+  console.log("loggat in ", activeUser)
+}

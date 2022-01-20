@@ -1,5 +1,7 @@
 import { React, createContext, useReducer } from 'react'
 import { userReducer } from '../../lib/reducers/activeUserReducer'
+import { USER_ACTIONS } from '../lib/reducers/activeUserReducer'
+
 import PropTypes from 'prop-types'
 
 
@@ -9,10 +11,10 @@ export const ActiveUserContext = createContext()
 
 const ActiveUserProvider = ({ children }) => {
   const [activeUser, activeUserDispatch] = useReducer(userReducer, {
-    userId: 1,
-    firstName: "[sätt i activeUserProvider]",
-    lastName: "lastname",
-    address: "here 123",
+    userId: null,
+    firstName: "",
+    lastName: "",
+    address: "",
     bookings: [{}]
   })
 
@@ -36,11 +38,28 @@ export function getUsers() {
     bookings
 }
 }
-export async function loadUser(userId) {
+export async function loadUser(activeUser, userId) {
+  console.log("userId", userId)
   if (userId) {
-  let res = await fetch(`http://localhost:8080/customer/get/id/${userId}`)
+    console.log("userId", userId)
+    let id = "1"
+    id = userId
+  let res = await fetch(`http://localhost:8080/customer/get/id/${id}`)
   let userInfo = await res.json()
   console.log("userInfo i loadUser:", userInfo)
+
+  activeUser.activeUserDispatch({
+    payload: {
+      userId: userInfo.customer_id,
+      firstName: userInfo.firstName,
+      lastName: userInfo.lastName,
+      address: userInfo.address,
+      bookings: [{}]
+    },
+    type: USER_ACTIONS.LOGIN
+  })
+
+
   return userInfo
   }
    return {}

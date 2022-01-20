@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         System.out.println("test");
         http.
                 csrf().disable()
-                .authorizeRequests().antMatchers("/customer/*", "/customer*", "/customer/*/*", "/booking/get/user/*","/booking/get/id/*", "/booking/add", "/booking/get/all", "customer/update", "booking/*")
+                .authorizeRequests().antMatchers("/customer/*","/customer/get/id/*", "/customer*", "/customer/*/*", "/booking/get/user/*","/booking/get/id/*", "/booking/add", "/booking/get/all", "customer/update", "booking/*")
                 .permitAll().anyRequest().authenticated()
                 .and()
                 .formLogin()
