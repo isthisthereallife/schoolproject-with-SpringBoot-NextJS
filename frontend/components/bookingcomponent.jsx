@@ -49,6 +49,7 @@ return (
         selected={datePicked}
         onChange={(date) => datetimeEvent(date)}
         showTimeSelect
+        
         timeFormat="HH:mm"
         timeIntervals={15}
         timeCaption="Tid"

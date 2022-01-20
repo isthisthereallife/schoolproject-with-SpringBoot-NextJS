@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/customer")
@@ -21,6 +22,10 @@ public class CustomerController {
         return "A new customer is added";
     }
 
+    @GetMapping("/get/id/{customer_id}")
+    public Optional<Customer> findById(@PathVariable("customer_id") int customer_id){
+        return customerService.findCustomerById(customer_id);
+    }
     @GetMapping("/get/all")
     public List<Customer> list() {
         return customerService.getAllCustomers();

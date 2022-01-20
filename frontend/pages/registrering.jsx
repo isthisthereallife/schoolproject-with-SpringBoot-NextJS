@@ -1,10 +1,10 @@
 import React from 'react'
 import RegisterUserComponent from '../components/registerusercomponent'
 
-function RegisterUser() {
+function Registrering() {
     return (
         <RegisterUserComponent />
     )
 }
 
-export default RegisterUser
+export default Registrering

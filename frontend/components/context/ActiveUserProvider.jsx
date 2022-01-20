@@ -24,7 +24,28 @@ const ActiveUserProvider = ({ children }) => {
     </ActiveUserContext.Provider >
   )
 }
+export function getUsers() {
 
+
+  let user
+  return {
+    userId: user.userId,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    address: user.address,
+    bookings
+}
+}
+export async function loadUser(userId) {
+  if (userId) {
+  let res = await fetch(`http://localhost:8080/customer/get/id/${userId}`)
+  let userInfo = await res.json()
+  console.log("userInfo i loadUser:", userInfo)
+  return userInfo
+  }
+   return {}
+
+}
 ActiveUserProvider.propTypes = {
   children: PropTypes.array
 }
