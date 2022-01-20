@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import useActiveUser from '../lib/hooks/useActiveUser'
-import { Grid, ListItem } from '@material-ui/core'
+import { Grid, ListItem, Button, FormControl, InputLabel, NativeSelect } from '@material-ui/core'
 import styles from '../styles/minabokningarcomponent.module.css'
 import { format } from 'date-fns'
 import Link from 'next/link'
 
 MinabokningarComponent.propTypes = {
   data: PropTypes.object
+}
+
+export const STATUS = {
+  OBEKRAFTAD: 'Obekräftad',
+  BEKRAFTAD: 'Bekräftad',
+  BOKAD: 'Bokad',
+  UNDER_UTFORANDE: 'Under utförande',
+  UTFORT: 'Utförd',
+  GODKANT: 'Godkänd',
+  FAKTURERAD: 'Fakturerad',
+  BETALD: 'Betald'
 }
 
 /**
@@ -17,10 +28,13 @@ export default function MinabokningarComponent({ data }) {
   const activeUser = useActiveUser()
   const [bookings, setBookings] = useState(data.userBookings)
   const datesplitter = ((datetime) => format(new Date(datetime), 'PPPP'))
+  const [statusSelection, setStatusSelection] = useState("Alla")
 
   useEffect(() => {
     getUserBookings(activeUser).then((booking) => setBookings(booking))
   }, [activeUser])
+
+
   if (!bookings || !bookings[0]) {
     return (
       <>
@@ -30,26 +44,53 @@ export default function MinabokningarComponent({ data }) {
         </>
     )
   }
+
+  function cardClickEvent(item) {
+    console.log("hejj")
+    console.log(item)
+  }
+
+
   return (
     <>
       <div>
+      <FormControl >
+  <InputLabel className={styles.valInputLabel} variant="standard" htmlFor="uncontrolled-native">
+    Filtrera
+  </InputLabel>
+  <NativeSelect
+    selected={statusSelection}
+    onChange={(value) => setStatusSelection(value.target.value)}
+
+    inputProps={{
+      name: 'StatusSelection',
+      id: 'uncontrolled-native'
+    }}
+  >
+    <option value="Alla">Alla</option>
+    <option value={STATUS.OBEKRAFTAD}>Obekräftade</option>
+    <option value={STATUS.BEKRAFTAD}>Bekräftade</option>
+    <option value={STATUS.UTFORT}>Utförda</option>
+    <option value={STATUS.GODKANT}>Godkända</option>
+  </NativeSelect>
+</FormControl>
         </div>
 
         <Grid className={styles.gridcontainer} container spacing={2}>
 
-          {bookings && bookings.map((booking) => (
+          {bookings && bookings.map((booking) => {
 
-            <Link key={ booking.booking_id} href={`/bokning/${booking.booking_id.toString()}`}>
-              <Grid className={styles.bookingcard} key={booking.booking_id} item container xs={6} md={4} lg={2} spacing={1}>
+              if (statusSelection === "Alla" || booking.status === statusSelection) {
+              return (<Grid onClick={(() => cardClickEvent(booking))} id={styles.bookingcardId} className={styles.bookingcard} key={booking.booking_id} item container xs={6} md={4} lg={2} spacing={1}>
 
-                <ListItem className={styles.listitem}><Grid>📆</Grid><Grid>{datesplitter(booking.datetime)}</Grid><Grid>🕙</Grid><Grid>{timesplitter(booking.datetime)}</Grid></ListItem>
-                <ListItem className={styles.listitem}><Grid>Städtyp:</Grid> <Grid> {booking.type_of_service}</Grid></ListItem>
-                <ListItem className={styles.listitem}><Grid> Status:</Grid><Grid> {booking.status}</Grid></ListItem>
-                <ListItem className={styles.listitem} key={booking.booking_id}>BokningsID: #{booking.booking_id}</ListItem>
-            </Grid>
-          </Link>
-
-          ))}
+                  <ListItem className={styles.listitem}><Grid>📆</Grid><Grid>{datesplitter(booking.datetime)}</Grid><Grid>🕙</Grid><Grid>{timesplitter(booking.datetime)}</Grid></ListItem>
+                  <ListItem className={styles.listitem}><Grid>Städtyp:</Grid> <Grid> {booking.type_of_service}</Grid></ListItem>
+                  <ListItem className={styles.listitem}><Grid> Status:</Grid><Grid> {booking.status}</Grid></ListItem>
+                  <ListItem className={styles.listitem} key={booking.booking_id}>BokningsID: #{booking.booking_id}</ListItem>
+              </Grid>)
+               }
+              }
+            )}
         </Grid>
 
     </>
@@ -63,7 +104,7 @@ async function getUserBookings(activeUser) {
 
 export function timesplitter(datetime) {
     let t = new Date(datetime)
-    return `${t.getHours()}:${t.getUTCMinutes().toString().length > 1 ? t.getMinutes() : ("0".concat(t.getMinutes()))}`
+    return `${t.getHours().toString().length > 1 ? t.getHours() : ("0".concat(t.getHours()))}:${t.getUTCMinutes().toString().length > 1 ? t.getMinutes() : ("0".concat(t.getMinutes()))}`
 
   }
 async function reloadBookings(userId) {
