@@ -131,7 +131,7 @@ myHeaders.append("Cookie", "JSESSIONID=1AFC3231401780EA7F31B3585B869FCC");
 
 let raw = JSON.stringify({
   "cleaner_id": 1,
-  "customer_id": activeUser.activeUser.userId,
+  "customer_id": activeUser.activeUser.customer_id,
   "datetime": datePicked,
   "type_of_service": typeOfService,
   "address": activeUser.activeUser.address,

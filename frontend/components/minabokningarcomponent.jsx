@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import useActiveUser from '../lib/hooks/useActiveUser'
@@ -33,8 +34,11 @@ export default function MinabokningarComponent({ data }) {
 
   useEffect(() => {
     getUserBookings(activeUser).then((booking) => setBookings(booking))
+    if (!bookings) {
+      return (<>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</>)
+    }
+    return (<>HAHAHAH</>)
   }, [activeUser])
-
 
   if (!bookings || !bookings[0]) {
     return (
@@ -113,7 +117,7 @@ export default function MinabokningarComponent({ data }) {
   )
 }
 async function getUserBookings(activeUser) {
-  const bookings = await reloadBookings(activeUser.activeUser.userId)
+  const bookings = await reloadBookings(activeUser.activeUser.customer_id)
   return bookings
 
 }
@@ -123,9 +127,9 @@ export function timesplitter(datetime) {
     return `${t.getHours().toString().length > 1 ? t.getHours() : ("0".concat(t.getHours()))}:${t.getUTCMinutes().toString().length > 1 ? t.getMinutes() : ("0".concat(t.getMinutes()))}`
 
   }
-async function reloadBookings(userId) {
-  if (userId) {
-  let res = await fetch(`http://localhost:8080/booking/get/user/${userId}`)
+async function reloadBookings(customer_id) {
+  if (customer_id) {
+  let res = await fetch(`http://localhost:8080/booking/get/user/${customer_id}`)
   let userBookings = await res.json()
   return userBookings
   }

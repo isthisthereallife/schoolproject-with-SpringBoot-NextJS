@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { React, createContext, useReducer } from 'react'
 import { userReducer, USER_ACTIONS } from '../../lib/reducers/activeUserReducer'
 
@@ -14,8 +15,9 @@ const ActiveUserProvider = ({ children }) => {
     username: "",
     firstName: "",
     lastName: "",
-    email: "",
+    e_mail: "",
     address: "",
+    phone: "",
     bookings: [{}]
   })
 

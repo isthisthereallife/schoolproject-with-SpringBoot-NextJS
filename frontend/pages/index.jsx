@@ -5,7 +5,7 @@ import { Button } from '@material-ui/core'
 import { FaRegCalendarPlus, FaCalendarDay, FaArrowRight } from 'react-icons/fa'
 import { debugChangeUser } from '../components/navbarcomponent'
 import useActiveUser from '../lib/hooks/useActiveUser'
-import { login } from '../components/LoginForm'
+import LoginForm, { login } from '../components/LoginForm'
 import { loadUser } from '../components/context/activeUserProvider'
 
 function HomePage() {
@@ -33,11 +33,12 @@ useEffect(() => {
 
 
     {/* <Button className={styles.button} variant="contained" startIcon={<FaCalendarDay/>}><Link href="/minabokningar">MINA BOKNINGAR</Link></Button> */}
-    {(activeUser.activeUser.user_id
+    {(activeUser.activeUser && activeUser.activeUser.customer_id
     ? <Button className={styles.button} variant="contained" startIcon={<FaRegCalendarPlus/>}>
         <Link href="/boka">bokning</Link>
       </Button>
     : <>
+        <LoginForm />
         <Link href="/minasidor"><Button className={styles.button} onClick={(() => loginBtnEvent())} variant="contained" startIcon={<FaArrowRight/>}>Logga in</Button></Link>
         <Link href="/registrering" variant="contained"><Button className={styles.button}>Registrera användare</Button></Link></>
         )}

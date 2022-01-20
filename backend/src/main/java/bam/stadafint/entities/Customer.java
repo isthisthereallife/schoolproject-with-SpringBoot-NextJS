@@ -25,6 +25,16 @@ public class Customer implements UserDetails {
     private String accountAccessLvl;
     @Column(name = "account_non_locked")
     private boolean accountNonLocked;
+    private String phone;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     private String username;
 
     public Customer() {

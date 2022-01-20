@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Button, Grid } from '@material-ui/core'
 import styles from '../styles/Navbar.module.css'
@@ -9,7 +9,7 @@ import { loadUser } from './context/activeUserProvider'
 
 function Navbarcomponent() {
   const activeUser = useActiveUser()
-  const debug = true
+  const debug = false
 
   return (
     <>
@@ -18,8 +18,7 @@ function Navbarcomponent() {
           <Link item href="/">
             <p className={styles.navbar_item}>Start</p>
           </Link>
-        </Grid>
-        {activeUser.activeUser.user_id
+        </Grid>{activeUser.activeUser && activeUser.activeUser.customer_id
           ? <>
             <Grid item xs={2}>
               <Link href="/minasidor">
@@ -34,7 +33,7 @@ function Navbarcomponent() {
             </Grid>
           </> : <Grid item xs={4}></Grid>}
         <Grid className={styles.loginLogoutBtn} item xs={4}>
-          {(activeUser.activeUser.user_id
+          {(activeUser.activeUser && activeUser.activeUser.customer_id
             ? <Button onClick={() => logout(activeUser)} variant="contained">Logga ut</Button>
             : "")}
         </Grid>

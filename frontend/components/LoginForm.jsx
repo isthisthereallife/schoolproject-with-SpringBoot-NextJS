@@ -31,6 +31,7 @@ export default function LoginForm() {
           name="username"
           placeholder="username"
           onChange={handleChange}
+          defaultValue="kundanders63"
           />
         </div>
         <div>
@@ -39,9 +40,9 @@ export default function LoginForm() {
           name="password"
           placeholder="password"
           onChange={handleChange}
+          defaultValue="**********"
           />
         </div>
-        <button type="submit">Submit</button>
       </form>
 
     )

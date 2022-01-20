@@ -4,7 +4,6 @@ import { FaRegCalendarPlus, FaCalendarDay, FaArrowRight } from 'react-icons/fa'
 import Link from 'next/link'
 import styles from '../styles/minasidor.module.css'
 import Minabokningarcomponent from '../components/minabokningarcomponent'
-import MinaSidorComponent from '../components/minasidorcomponent'
 import useActiveUser from '../lib/hooks/useActiveUser'
 
 
@@ -15,7 +14,7 @@ function MyPages(userBookings) {
 
 
     useEffect(() => {
-      if (activeUser.activeUser.userId) {
+      if (activeUser.activeUser && activeUser.activeUser.customer_id) {
       if (!loaded) getUserBookings(activeUser).then((eachBooking) => setBookings(eachBooking))
       setLoaded(true)
       }
@@ -34,21 +33,18 @@ function MyPages(userBookings) {
     <div className={styles.main}>
     <Grid container className={styles.navbar}>
         <Grid item xs={12}>
-      <h5>Välkommen </h5>
+      <h3>{activeUser.activeUser && activeUser.activeUser.username}</h3>
       </Grid>
       <Grid container className={styles.user_info_grid}>
-        {console.log("activeUser inne i koden", activeUser.activeUser)}
         <ListItem className={styles.user_info_item}><Grid item xs={3}>Namn:</Grid><Grid item xs={6}> {activeUser.activeUser.first_name} {activeUser.activeUser.lastName}</Grid></ListItem>
         <ListItem className={styles.user_info_item}><Grid item xs={3}>Adress:</Grid><Grid item xs={6}> {activeUser.activeUser.address}</Grid></ListItem>
         <ListItem className={styles.user_info_item}><Grid item xs={3}>Telefon:</Grid><Grid item xs={6}> {activeUser.activeUser.phone}</Grid></ListItem>
-        <ListItem className={styles.user_info_item}><Grid item xs={3}>Email:</Grid><Grid item xs={6} >{activeUser.activeUser.email}</Grid></ListItem>
+        <ListItem className={styles.user_info_item}><Grid item xs={3}>Email:</Grid><Grid item xs={6} >{activeUser.activeUser.e_mail}</Grid></ListItem>
         <ListItem className={styles.user_info_item}><Grid item xs={3}>Password:</Grid><Grid item xs={6} >**********</Grid></ListItem>
       </Grid>
 
       </Grid>
       {/* <h2><MinaSidor /></h2> */}
-
-      <button onClick={MinaSidorComponent.updateUser}>Ändra</button>
 
       <h2>Mina bokningar</h2>
       <Minabokningarcomponent data={bookings} />
@@ -60,7 +56,7 @@ function MyPages(userBookings) {
 
 // eslint-disable-next-line require-await
 async function getUserBookings(activeUser) {
-  return reloadProps(activeUser.activeUser.userId)
+  return reloadProps(activeUser.activeUser.customer_id)
 }
 async function reloadProps(id) {
 
