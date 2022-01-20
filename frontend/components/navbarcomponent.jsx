@@ -5,10 +5,11 @@ import styles from '../styles/Navbar.module.css'
 import useActiveUser from '../lib/hooks/useActiveUser'
 import { USER_ACTIONS } from '../lib/reducers/activeUserReducer'
 import { FaUsers } from 'react-icons/fa'
+import { loadUser } from './context/activeUserProvider'
 
 function Navbarcomponent() {
   const activeUser = useActiveUser()
-  const debug = false
+  const debug = true
 
   return (
     <>
@@ -33,14 +34,14 @@ function Navbarcomponent() {
             </Grid>
           </> : <Grid item xs={4}></Grid>}
         <Grid className={styles.loginLogoutBtn} item xs={4}>
-          {(activeUser.activeUser
+          {(activeUser.activeUser.user_id
             ? <Button onClick={() => logout(activeUser)} variant="contained">Logga ut</Button>
             : "")}
         </Grid>
         {(debug
           ? <Grid className={styles.navbarBtn} item xs={2}>
-            <Button onClick={() => debugChangeUser(activeUser)} variant="contained">
-              {(activeUser.activeUser ? <div className={styles.toggleBtn}><p><FaUsers /></p>  <p>toggle user</p></div> : "Logga in")}</Button>
+            <Button onClick={() => (activeUser.activeUser.user_id === 1 ? loadUser(activeUser, 2) : loadUser(activeUser, 1))} variant="contained">
+              {(activeUser.activeUser.user_id ? <div className={styles.toggleBtn}><p><FaUsers /></p>  <p>toggle user</p></div> : "Logga in")}</Button>
           </Grid>
           : "")}
       </Grid>

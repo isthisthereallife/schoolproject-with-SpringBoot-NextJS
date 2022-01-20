@@ -63,6 +63,7 @@ export default function MinabokningarComponent({ data }) {
     }
     setSelectedCards(cards)
     console.log("sele", selectedCards)
+    console.log("detta är activueUser", activeUser)
   }
 
 

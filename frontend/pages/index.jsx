@@ -38,7 +38,7 @@ useEffect(() => {
         <Link href="/boka">bokning</Link>
       </Button>
     : <>
-        <Button className={styles.button} onClick={(() => loginBtnEvent())} variant="contained" startIcon={<FaArrowRight/>}>Logga in</Button>
+        <Link href="/minasidor"><Button className={styles.button} onClick={(() => loginBtnEvent())} variant="contained" startIcon={<FaArrowRight/>}>Logga in</Button></Link>
         <Link href="/registrering" variant="contained"><Button className={styles.button}>Registrera användare</Button></Link></>
         )}
 

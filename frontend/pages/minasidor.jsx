@@ -15,7 +15,7 @@ function MyPages(userBookings) {
 
 
     useEffect(() => {
-      if (activeUser.activeUser) {
+      if (activeUser.activeUser.userId) {
       if (!loaded) getUserBookings(activeUser).then((eachBooking) => setBookings(eachBooking))
       setLoaded(true)
       }
@@ -34,14 +34,14 @@ function MyPages(userBookings) {
     <div className={styles.main}>
     <Grid container className={styles.navbar}>
         <Grid item xs={12}>
-      <h5>Du är inloggad som: </h5>
+      <h5>Välkommen </h5>
       </Grid>
       <Grid container className={styles.user_info_grid}>
-
-        <ListItem className={styles.user_info_item}><Grid item xs={3}>Namn:</Grid><Grid item xs={6}> {activeUser.activeUser.firstName} {activeUser.activeUser.lastName}</Grid></ListItem>
-        <ListItem className={styles.user_info_item}><Grid item xs={3}>Adress:</Grid><Grid item xs={6}> blablablabl 33{activeUser.activeUser.address}</Grid></ListItem>
-        <ListItem className={styles.user_info_item}><Grid item xs={3}>Telefon:</Grid><Grid item xs={6}> 08494988844{activeUser.activeUser.phone}</Grid></ListItem>
-        <ListItem className={styles.user_info_item}><Grid item xs={3}>Email:</Grid><Grid item xs={6} >thrcoochu@ch;unh.coher{activeUser.activeUser.email}</Grid></ListItem>
+        {console.log("activeUser inne i koden", activeUser.activeUser)}
+        <ListItem className={styles.user_info_item}><Grid item xs={3}>Namn:</Grid><Grid item xs={6}> {activeUser.activeUser.first_name} {activeUser.activeUser.lastName}</Grid></ListItem>
+        <ListItem className={styles.user_info_item}><Grid item xs={3}>Adress:</Grid><Grid item xs={6}> {activeUser.activeUser.address}</Grid></ListItem>
+        <ListItem className={styles.user_info_item}><Grid item xs={3}>Telefon:</Grid><Grid item xs={6}> {activeUser.activeUser.phone}</Grid></ListItem>
+        <ListItem className={styles.user_info_item}><Grid item xs={3}>Email:</Grid><Grid item xs={6} >{activeUser.activeUser.email}</Grid></ListItem>
         <ListItem className={styles.user_info_item}><Grid item xs={3}>Password:</Grid><Grid item xs={6} >**********</Grid></ListItem>
       </Grid>
 
@@ -69,11 +69,13 @@ async function reloadProps(id) {
   return { data }
 }
 
-// export async function getStaticProps() {
-//   const response = await fetch(`http://localhost:8080/booking/get/user/1`)
-//   console.log("THIS IS THE RESPONSE", response)
-//   const userBookings = await response.json()
-//   return { props: { userBookings } }
-// }
+/*
+ * export async function getStaticProps() {
+ *   const response = await fetch(`http://localhost:8080/booking/get/user/1`)
+ *   console.log("THIS IS THE RESPONSE", response)
+ *   const userBookings = await response.json()
+ *   return { props: { userBookings } }
+ * }
+ */
 
 export default MyPages
