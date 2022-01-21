@@ -50,7 +50,7 @@ function MyPages(userBookings) {
       <h2>Mina bokningar</h2>
       <Minabokningarcomponent data={bookings} />
 
-      <Button variant="contained" startIcon={<FaCartPlus/>}><Link href="/boka">Boka fler städningar: Bokning</Link></Button>
+      <Link href="/boka"><Button variant="contained" startIcon={<FaCartPlus/>}>Boka fler städningar</Button></Link>
     </div>
   </>
 }
