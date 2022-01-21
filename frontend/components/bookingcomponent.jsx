@@ -46,6 +46,7 @@ useEffect(() => {
 }, [])
 
 function bookingEvent () {
+  console.log("activeUser hhheheheohehe", activeUser.activeUser)
   if (activeUser.activeUser && activeUser.activeUser.customer_id) {
     postBooking(datePicked, typeOfService, description, activeUser)
     setIsBooked(true)
@@ -103,7 +104,7 @@ return (
       </div>
       {!dayIsPassed
         ? <div className={styles.bookingbuttondiv}>
-          <Button variant="contained" onClick={bookingEvent} className={styles.bookingbutton} startIcon={<FaCheckCircle/>}>Boka</Button>
+          <Link href="/minasidor"><Button variant="contained" onClick={bookingEvent} className={styles.bookingbutton} startIcon={<FaCheckCircle/>}>Boka</Button></Link>
         </div>
       : <div className={styles.bookingbuttondiv}>
           <p>Välj en kommande dag</p>
