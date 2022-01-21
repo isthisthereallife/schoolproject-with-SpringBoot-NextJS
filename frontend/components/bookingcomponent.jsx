@@ -46,7 +46,7 @@ useEffect(() => {
 }, [])
 
 function bookingEvent () {
-  if (activeUser.active && activeUser.activeUser.customer_id) {
+  if (activeUser.activeUser && activeUser.activeUser.customer_id) {
     postBooking(datePicked, typeOfService, description, activeUser)
     setIsBooked(true)
   }
