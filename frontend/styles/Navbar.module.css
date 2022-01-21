@@ -25,6 +25,8 @@
 .navbar_item{
   cursor:pointer;
   user-select: none;
+  display:flex;
+  justify-content: center;
 }
 .loginLogoutBtn *{
   size: 10px;

@@ -4,7 +4,7 @@ import { Button, Grid } from '@material-ui/core'
 import styles from '../styles/Navbar.module.css'
 import useActiveUser from '../lib/hooks/useActiveUser'
 import { USER_ACTIONS } from '../lib/reducers/activeUserReducer'
-import { FaUsers } from 'react-icons/fa'
+import { FaUsers, FaHouseUser, FaCartPlus } from 'react-icons/fa'
 import { loadUser } from './context/activeUserProvider'
 
 function Navbarcomponent() {
@@ -22,13 +22,13 @@ function Navbarcomponent() {
           ? <>
             <Grid item xs={2}>
               <Link href="/minasidor">
-                <p className={styles.navbar_item}>Mina sidor</p>
+                <p className={styles.navbar_item}><FaHouseUser/></p>
               </Link>
             </Grid>
 
             <Grid item xs={2}>
               <Link href="/boka">
-                <p className={styles.navbar_item}>Gör en bokning</p>
+                <p className={styles.navbar_item}><FaCartPlus/></p>
               </Link>
             </Grid>
           </> : <Grid item xs={4}></Grid>}

@@ -70,48 +70,52 @@ export default function MinabokningarComponent({ data }) {
     console.log("detta är activueUser", activeUser)
   }
 
-
+  let empty = true
   return (
     <>
       <div>
-      <FormControl >
-  <InputLabel className={styles.valInputLabel} variant="standard" htmlFor="uncontrolled-native">
-    Filtrera
-  </InputLabel>
-  <NativeSelect
-    selected={statusSelection}
-    onChange={(value) => setStatusSelection(value.target.value)}
+        <FormControl >
+          <InputLabel className={styles.valInputLabel} variant="standard" htmlFor="uncontrolled-native">
+              Filtrera
+          </InputLabel>
+          <NativeSelect
+            selected={statusSelection}
+            onChange={(value) => setStatusSelection(value.target.value)}
+            inputProps={{
+              name: 'StatusSelection',
+              id: 'uncontrolled-native'
+            }}
+          >
+            <option value="Alla">Alla</option>
+            <option value={STATUS.OBEKRAFTAD}>Obekräftade</option>
+            <option value={STATUS.BEKRAFTAD}>Bekräftade</option>
+            <option value={STATUS.UTFORT}>Utförda</option>
+            <option value={STATUS.GODKANT}>Godkända</option>
+          </NativeSelect>
+        </FormControl>
+      </div>
 
-    inputProps={{
-      name: 'StatusSelection',
-      id: 'uncontrolled-native'
-    }}
-  >
-    <option value="Alla">Alla</option>
-    <option value={STATUS.OBEKRAFTAD}>Obekräftade</option>
-    <option value={STATUS.BEKRAFTAD}>Bekräftade</option>
-    <option value={STATUS.UTFORT}>Utförda</option>
-    <option value={STATUS.GODKANT}>Godkända</option>
-  </NativeSelect>
-</FormControl>
-        </div>
-
-        <Grid className={styles.gridcontainer} container spacing={2}>
-
-          {bookings && bookings.map((booking) => {
-
-              if (statusSelection === "Alla" || booking.status === statusSelection) {
-              return (<Grid onClick={(() => cardClickEvent(booking))} id={styles.bookingcardId} className={styles.bookingcard} key={booking.booking_id} item container xs={6} md={4} lg={2} spacing={1}>
-
-                  <ListItem className={styles.listitem}><Grid>📆</Grid><Grid>{datesplitter(booking.datetime)}</Grid><Grid>🕙</Grid><Grid>{timesplitter(booking.datetime)}</Grid></ListItem>
-                  <ListItem className={styles.listitem}><Grid>Städtyp:</Grid> <Grid> {booking.type_of_service}</Grid></ListItem>
-                  <ListItem className={styles.listitem}><Grid> Status:</Grid><Grid> {booking.status}</Grid></ListItem>
-                  <ListItem className={styles.listitem} key={booking.booking_id}>BokningsID: #{booking.booking_id}</ListItem>
+      <Grid className={styles.gridcontainer} container spacing={2}>
+        {bookings && bookings.map((booking) => {
+          if (statusSelection === "Alla" || booking.status === statusSelection) {
+            empty = false
+            return (
+              <Grid onClick={(() => cardClickEvent(booking))} id={styles.bookingcardId} className={styles.bookingcard} key={booking.booking_id} item container xs={6} md={4} lg={2} spacing={1}>
+                <ListItem className={styles.listitem}><Grid>📆</Grid><Grid>{datesplitter(booking.datetime)}</Grid><Grid>🕙</Grid><Grid>{timesplitter(booking.datetime)}</Grid></ListItem>
+                <ListItem className={styles.listitem}><Grid>Städtyp:</Grid> <Grid> {booking.type_of_service}</Grid></ListItem>
+                <ListItem className={styles.listitem}><Grid> Status:</Grid><Grid> {booking.status}</Grid></ListItem>
+                <ListItem className={styles.listitem} key={booking.booking_id}>BokningsID: #{booking.booking_id}</ListItem>
               </Grid>)
-               }
-              }
-            )}
-        </Grid>
+            }
+        })}
+      </Grid>
+
+      {empty
+        ? (
+      <div>
+        <h3>Inga bokningar hittades</h3>
+        </div>)
+        : (<></>)}
 
     </>
   )

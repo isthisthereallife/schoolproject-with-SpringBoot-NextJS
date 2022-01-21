@@ -7,6 +7,8 @@ import sv from 'date-fns/locale/sv'
 import useActiveUser from '../lib/hooks/useActiveUser'
 import Link from 'next/link'
 import { Button, NativeSelect, FormControl, InputLabel } from '@material-ui/core'
+import { FaCheckCircle, FaHome } from 'react-icons/fa'
+
 
 registerLocale('sv', sv)
 
@@ -44,9 +46,10 @@ useEffect(() => {
 }, [])
 
 function bookingEvent () {
-  postBooking(datePicked, typeOfService, description, activeUser)
-  setIsBooked(true)
-
+  if (activeUser.active && activeUser.activeUser.customer_id) {
+    postBooking(datePicked, typeOfService, description, activeUser)
+    setIsBooked(true)
+  }
 }
 return (
   <>
@@ -100,7 +103,7 @@ return (
       </div>
       {!dayIsPassed
         ? <div className={styles.bookingbuttondiv}>
-          <Button variant="contained" onClick={bookingEvent} className={styles.bookingbutton}>Boka</Button>
+          <Button variant="contained" onClick={bookingEvent} className={styles.bookingbutton} startIcon={<FaCheckCircle/>}>Boka</Button>
         </div>
       : <div className={styles.bookingbuttondiv}>
           <p>Välj en kommande dag</p>
@@ -113,7 +116,7 @@ return (
       <div>Din städning kommer ske.
       </div>
       <div className={styles.backToStartButtondiv}>
-        <button className={styles.backToStartButton}><Link href="/">Tillbaka till startsidan</Link></button>
+        <Link href="/"><Button variant="contained" startIcon={<FaHome/>}>Tillbaka till startsidan</Button></Link>
       </div>
     </div>
 }

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import styles from '../styles/minasidor.module.css'
 import Minabokningarcomponent from '../components/minabokningarcomponent'
 import useActiveUser from '../lib/hooks/useActiveUser'
+import { FaCartPlus } from 'react-icons/fa'
 
 
 function MyPages(userBookings) {
@@ -22,7 +23,7 @@ function MyPages(userBookings) {
 
     if (!activeUser.activeUser) {
       return (<>
-      <div>
+      <div className={styles.main}>
         <h1>Utloggad</h1>
         </div>
         </>
@@ -49,7 +50,7 @@ function MyPages(userBookings) {
       <h2>Mina bokningar</h2>
       <Minabokningarcomponent data={bookings} />
 
-      <div>Boka fler städningar: <Link href="/booking">Bokning</Link></div>
+      <Button variant="contained" startIcon={<FaCartPlus/>}><Link href="/boka">Boka fler städningar: Bokning</Link></Button>
     </div>
   </>
 }
