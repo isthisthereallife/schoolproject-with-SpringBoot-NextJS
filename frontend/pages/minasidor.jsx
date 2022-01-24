@@ -57,8 +57,11 @@ function MyPages(userBookings) {
 }
 
 // eslint-disable-next-line require-await
-async function getUserBookings(activeUser) {
-  return reloadProps(activeUser.activeUser.customer_id)
+function getUserBookings(activeUser) {
+  if (activeUser.activeUser && activeUser.activeUser.customer_id) {
+    return reloadProps(activeUser.activeUser.customer_id)
+  }
+  return null
 }
 async function reloadProps(id) {
 

@@ -25,9 +25,9 @@ export const STATUS = {
 /**
  * den här ska sidan skriva ut den aktiva användarens bokningar
  */
-export default function MinabokningarComponent(bokningar) {
+export default function MinabokningarComponent() {
   const activeUser = useActiveUser()
-  const [bookings, setBookings] = useState(bokningar)
+  const [bookings, setBookings] = useState()
   const datesplitter = ((datetime) => format(new Date(datetime), 'PPPP'))
   const [statusSelection, setStatusSelection] = useState("Alla")
   const [selectedCards, setSelectedCards] = useState([{}])
@@ -37,7 +37,7 @@ export default function MinabokningarComponent(bokningar) {
   useEffect(() => {
     getUserBookings(activeUser).then((booking) => setBookings(booking))
     if (!sorted) setSorted(true)
-  })
+  }, [activeUser, sorted])
 
   if (!bookings || !bookings[0]) {
     return (
