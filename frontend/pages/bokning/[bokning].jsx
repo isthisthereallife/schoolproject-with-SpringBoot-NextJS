@@ -1,11 +1,8 @@
 import React from 'react'
-import useActiveUser from '../../lib/hooks/useActiveUser'
 
 
 export default function bokning(bokningsinfo) {
-const activeUser = useActiveUser()
 
-  console.log("bokningsinfo: ", bokningsinfo)
   return (
     <>
       <div>
@@ -35,9 +32,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  console.log("params: ", params)
   const res = await fetch(`http://localhost:8080/booking/get/id/${params.bokning}`)
   const data = await res.json()
-  console.log("data i getStaticProps", data)
   return { props: { bokning: data } }
 }

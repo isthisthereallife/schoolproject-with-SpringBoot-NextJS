@@ -2,13 +2,9 @@ import React from 'react'
 
 import Minabokningarcomponent from '../components/minabokningarcomponent'
 import useActiveUser from '../lib/hooks/useActiveUser'
-let id = 0;
 
 
 function BookingPage(userBookings) {
-  const activeUser = useActiveUser()
-  id = activeUser.activeUser.customer_id
-  console.log("activeUser..userId i minabokningar", id)
 return (
   <>
   <Minabokningarcomponent data={userBookings}/>

@@ -1,11 +1,11 @@
 /* eslint-disable camelcase */
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import useActiveUser from '../lib/hooks/useActiveUser'
-import { Grid, ListItem, Button, FormControl, InputLabel, NativeSelect } from '@material-ui/core'
+import { Grid, ListItem, FormControl, InputLabel, NativeSelect } from '@material-ui/core'
 import styles from '../styles/minabokningarcomponent.module.css'
 import { format } from 'date-fns'
-import Link from 'next/link'
+
 
 MinabokningarComponent.propTypes = {
   data: PropTypes.object
@@ -31,13 +31,11 @@ export default function MinabokningarComponent({ data }) {
   const datesplitter = ((datetime) => format(new Date(datetime), 'PPPP'))
   const [statusSelection, setStatusSelection] = useState("Alla")
   const [selectedCards, setSelectedCards] = useState([{}])
+  const [sorted, setSorted] = useState(false)
+
 
   useEffect(() => {
     getUserBookings(activeUser).then((booking) => setBookings(booking))
-    if (!bookings) {
-      return (<>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</>)
-    }
-    return (<>HAHAHAH</>)
   }, [activeUser])
 
   if (!bookings || !bookings[0]) {

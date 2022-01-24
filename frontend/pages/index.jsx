@@ -1,38 +1,20 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import styles from '../styles/index.module.css'
 import { Button } from '@material-ui/core'
-import { FaRegCalendarPlus, FaCalendarDay, FaHouseUser, FaArrowRight, FaCartPlus } from 'react-icons/fa'
-import { debugChangeUser } from '../components/navbarcomponent'
+import { FaHouseUser, FaCartPlus } from 'react-icons/fa'
 import useActiveUser from '../lib/hooks/useActiveUser'
-import LoginForm, { login } from '../components/LoginForm'
-import { loadUser } from '../components/context/activeUserProvider'
+import LoginComponent from '../components/LoginComponent'
 
 function HomePage() {
   const activeUser = useActiveUser()
 
-  const DEBUG_USER_ID = 1
 
-  const debugLogin = (() => {
-    debugChangeUser(activeUser)
-  })
-
-
-useEffect(() => {
-
-  console.log("what")
-}, [activeUser])
-
-
-  function loginBtnEvent() {
-    loadUser(activeUser, DEBUG_USER_ID)
-  }
   return <>
   <div className={styles.main}>
     <h2>Välkommen till Städa Fint AB</h2>
 
 
-    {/* <Button className={styles.button} variant="contained" startIcon={<FaCalendarDay/>}><Link href="/minabokningar">MINA BOKNINGAR</Link></Button> */}
     {(activeUser.activeUser && activeUser.activeUser.customer_id
     ? <>
         <Link href="/minasidor">
@@ -47,8 +29,7 @@ useEffect(() => {
         </Link>
       </>
     : <>
-        <LoginForm />
-        <Link href="/minasidor"><Button className={styles.button} onClick={(() => loginBtnEvent())} variant="contained" startIcon={<FaArrowRight/>}>Logga in</Button></Link>
+        <LoginComponent />
         <Link href="/registrering" ><Button variant="contained" className={styles.button}>Registrera användare</Button></Link></>
         )}
 

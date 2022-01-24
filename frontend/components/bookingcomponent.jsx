@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import 'react-datepicker/dist/react-datepicker.css'
 import DatePicker, { registerLocale } from 'react-datepicker'
-import styles from '../styles/Bookingcomponent.module.css'
+import styles from '../styles/bookingcomponent.module.css'
 import sv from 'date-fns/locale/sv'
 import useActiveUser from '../lib/hooks/useActiveUser'
 import Link from 'next/link'
@@ -24,7 +24,7 @@ const [typeOfService, setTypeOfService] = useState("Basic Städning")
 const [description, setDescription] = useState("Det är ett stort hus")
 const [isBooked, setIsBooked] = useState(false)
 const [dayIsPassed, setDayIsPassed] = useState(false)
-
+const [loaded, setLoaded] = useState(false)
 
 function datetimeEvent(date) {
   let ISODate = date
@@ -40,45 +40,51 @@ useEffect(() => {
 }, [datePicked])
 
 useEffect(() => {
+  console.log("loaded", loaded)
+  if (activeUser.activeUser && activeUser.activeUser.customer_id) {
+  setLoaded(true)
+  }
+}, [activeUser.activeUser])
+useEffect(() => {
   let newDate = new Date()
   newDate.setDate(newDate.getDate() + 1)
   setDatePicked(newDate)
 }, [])
 
 function bookingEvent () {
-  console.log("activeUser hhheheheohehe", activeUser.activeUser)
   if (activeUser.activeUser && activeUser.activeUser.customer_id) {
     postBooking(datePicked, typeOfService, description, activeUser)
     setIsBooked(true)
   }
 }
+
 return (
   <>
-    <div className={styles.main}>
+  {loaded
+  ? (<>
 
     {!isBooked ? (
       <>
     <div>
       <h1 className={styles.headline}>Gör din bokning här</h1>
       <div className={styles.datepickerdiv}>
+        <DatePicker
+          calendarClassName={styles.datepicker}
+          wrapperClassName={styles.datepicker}
+          inline
+          locale="sv"
+          selected={datePicked}
+          onChange={(date) => datetimeEvent(date)}
+          showTimeSelect
+          showDisabledMonthNavigation
 
-      <DatePicker
-        calendarClassName={styles.datepicker}
-        wrapperClassName={styles.datepicker}
-        inline
-        locale="sv"
-        selected={datePicked}
-        onChange={(date) => datetimeEvent(date)}
-        showTimeSelect
-        showDisabledMonthNavigation
-
-        /*showWeekNumbers*/
-        timeFormat="HH:mm"
-        timeIntervals={15}
-        timeCaption="Tid"
-        dateFormat="d MMMM, yyyy H:mm"
-        htmlFor="uncontrolled-native"
-      />
+          /*showWeekNumbers*/
+          timeFormat="HH:mm"
+          timeIntervals={15}
+          timeCaption="Tid"
+          dateFormat="d MMMM, yyyy H:mm"
+          htmlFor="uncontrolled-native"
+        />
       </div>
     </div>
     <div className={styles.valAvTjanstForm}>
@@ -104,26 +110,32 @@ return (
       </div>
       {!dayIsPassed
         ? <div className={styles.bookingbuttondiv}>
-          <Button variant="contained" onClick={bookingEvent} className={styles.bookingbutton} startIcon={<FaCheckCircle/>}>Boka</Button>
-        </div>
+           <Button variant="contained" onClick={bookingEvent} className={styles.bookingbutton} startIcon={<FaCheckCircle/>}>Boka</Button>
+          </div>
       : <div className={styles.bookingbuttondiv}>
           <p>Välj en kommande dag</p>
         </div>
       }
     </>)
 
-    : <div className={styles.confirmationdiv}>
-      <h3>Detta är din bokningsbekräftelse.</h3>
-      <div>Din städning kommer ske.
-      </div>
-      <div className={styles.backToStartButtondiv}>
-        <Link href="/"><Button variant="contained" startIcon={<FaHome/>}>Tillbaka till startsidan</Button></Link>
-      </div>
-    </div>
-}
-  </div>
+    : (<>
+        <div className={styles.confirmationdiv}>
+          <h3>Detta är din bokningsbekräftelse.</h3>
+          <div>Din städning kommer ske.
+          </div>
+          <div className={styles.backToStartButtondiv}>
+            <Link href="/"><Button variant="contained" startIcon={<FaHome/>}>Tillbaka till startsidan</Button></Link>
+          </div>
+        </div>
+      </>)}
 </>
-)
+) : (<div className={styles.main}>
+  <h1>Utloggad</h1>
+  </div>)
+
+}
+</>
+    )
 }
 
 export function postBooking(datePicked, typeOfService, description, activeUser) {

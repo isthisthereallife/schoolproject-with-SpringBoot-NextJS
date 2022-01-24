@@ -1,7 +1,16 @@
 import React, { useState } from 'react'
 import { USER_ACTIONS } from '../lib/reducers/activeUserReducer'
+import Link from 'next/link'
+import { Button } from '@material-ui/core'
+import { FaArrowRight } from 'react-icons/fa'
+import styles from '../styles/logincomponent.module.css'
+import { loadUser } from '../components/context/activeUserProvider'
+import useActiveUser from '../lib/hooks/useActiveUser'
 
-export default function LoginForm() {
+const TO_BE_IMPLEMENTED_USER_ID = 1
+
+export default function LoginComponent() {
+  const activeUser = useActiveUser()
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
@@ -12,19 +21,20 @@ export default function LoginForm() {
     } else {
          setPassword(event.target.value)
         }
-        console.log(username)
-        console.log(password)
 
 
   })
   const handleSubmit = ((event) => {
     event.preventDefault()
     console.log("username:", username, "  password:", password)
-
-
   })
 
-    return (
+
+ function loginBtnEvent() {
+  loadUser(activeUser, TO_BE_IMPLEMENTED_USER_ID)
+}
+
+    return (<>
       <form>
         <div>
           <input type="username"
@@ -44,10 +54,10 @@ export default function LoginForm() {
           />
         </div>
       </form>
-
+              <Link href="/minasidor"><Button className={styles.button} onClick={(() => loginBtnEvent())} variant="contained" startIcon={<FaArrowRight/>}>Logga in</Button></Link>
+</>
     )
   }
-
 
 export function login(activeUser) {
   activeUser.activeUserDispatch({
