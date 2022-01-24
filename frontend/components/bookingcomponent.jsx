@@ -104,7 +104,7 @@ return (
       </div>
       {!dayIsPassed
         ? <div className={styles.bookingbuttondiv}>
-          <Link href="/minasidor"><Button variant="contained" onClick={bookingEvent} className={styles.bookingbutton} startIcon={<FaCheckCircle/>}>Boka</Button></Link>
+          <Button variant="contained" onClick={bookingEvent} className={styles.bookingbutton} startIcon={<FaCheckCircle/>}>Boka</Button>
         </div>
       : <div className={styles.bookingbuttondiv}>
           <p>Välj en kommande dag</p>

@@ -49,7 +49,7 @@ useEffect(() => {
     : <>
         <LoginForm />
         <Link href="/minasidor"><Button className={styles.button} onClick={(() => loginBtnEvent())} variant="contained" startIcon={<FaArrowRight/>}>Logga in</Button></Link>
-        <Link href="/registrering" variant="contained"><Button className={styles.button}>Registrera användare</Button></Link></>
+        <Link href="/registrering" ><Button variant="contained" className={styles.button}>Registrera användare</Button></Link></>
         )}
 
     </div>
