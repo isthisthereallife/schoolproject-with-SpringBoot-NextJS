@@ -21,7 +21,7 @@ export default function Bookingcomponent() {
 const activeUser = useActiveUser()
 const [datePicked, setDatePicked] = useState("")
 const [typeOfService, setTypeOfService] = useState("Basic Städning")
-const [description, setDescription] = useState("Det är ett stort hus")
+const [description] = useState("Det är ett stort hus")
 const [isBooked, setIsBooked] = useState(false)
 const [dayIsPassed, setDayIsPassed] = useState(false)
 const [loaded, setLoaded] = useState(false)
@@ -40,7 +40,6 @@ useEffect(() => {
 }, [datePicked])
 
 useEffect(() => {
-  console.log("loaded", loaded)
   if (activeUser.activeUser && activeUser.activeUser.customer_id) {
   setLoaded(true)
   }
@@ -59,7 +58,7 @@ function bookingEvent () {
 }
 
 return (
-  <>
+  <span className={styles.main}>
   {loaded
   ? (<>
 
@@ -134,7 +133,7 @@ return (
   </div>)
 
 }
-</>
+</span>
     )
 }
 
@@ -164,6 +163,8 @@ let requestOptions = {
 
 fetch("http://localhost:8080/booking/add", requestOptions).
   then((response) => response.text()).
+  // eslint-disable-next-line no-console
   then((result) => console.log(result)).
+  // eslint-disable-next-line no-console
   catch((error) => console.log('error', error));
 }

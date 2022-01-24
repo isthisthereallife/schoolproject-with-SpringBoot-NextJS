@@ -31,14 +31,11 @@ const ActiveUserProvider = ({ children }) => {
 }
 
 export async function loadUser(activeUser, userId) {
-  console.log("userId", userId)
   if (userId) {
-    console.log("userId", userId)
     let id = 1
     id = userId
   let res = await fetch(`http://localhost:8080/customer/get/id/${id}`)
   let userInfo = await res.json()
-  console.log("userInfo i loadUser:", userInfo)
 
   activeUser.activeUserDispatch({
     payload: userInfo,

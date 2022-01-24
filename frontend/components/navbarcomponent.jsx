@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { Button, Grid } from '@material-ui/core'
 import styles from '../styles/Navbar.module.css'

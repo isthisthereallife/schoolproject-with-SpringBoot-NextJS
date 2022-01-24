@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Grid, ListItem } from '@material-ui/core'
-import { FaRegCalendarPlus, FaCalendarDay, FaArrowRight } from 'react-icons/fa'
 import Link from 'next/link'
 import styles from '../styles/minasidor.module.css'
 import Minabokningarcomponent from '../components/minabokningarcomponent'
@@ -16,8 +15,10 @@ function MyPages(userBookings) {
 
     useEffect(() => {
       if (activeUser.activeUser && activeUser.activeUser.customer_id) {
-      if (!loaded) getUserBookings(activeUser).then((eachBooking) => setBookings(eachBooking))
-      setLoaded(true)
+        if (!loaded) {
+          getUserBookings(activeUser).then((eachBooking) => setBookings(eachBooking))
+          setLoaded(true)
+        }
       }
     }, [loaded, activeUser])
 

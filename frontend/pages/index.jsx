@@ -4,7 +4,7 @@ import styles from '../styles/index.module.css'
 import { Button } from '@material-ui/core'
 import { FaHouseUser, FaCartPlus } from 'react-icons/fa'
 import useActiveUser from '../lib/hooks/useActiveUser'
-import LoginComponent from '../components/LoginComponent'
+import LoginComponent from '../components/logincomponent'
 
 function HomePage() {
   const activeUser = useActiveUser()

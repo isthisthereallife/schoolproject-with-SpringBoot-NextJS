@@ -5,7 +5,8 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "next/core-web-vitals"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -18,6 +19,8 @@
         "react"
     ],
     "rules": {
+        "react/no-unescaped-entities": "off",
+        "@next/next/link-passhref": "off",
         "accessor-pairs": "error",
         "array-bracket-newline": "error",
         "array-bracket-spacing": [

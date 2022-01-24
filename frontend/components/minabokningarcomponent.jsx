@@ -25,9 +25,9 @@ export const STATUS = {
 /**
  * den här ska sidan skriva ut den aktiva användarens bokningar
  */
-export default function MinabokningarComponent({ data }) {
+export default function MinabokningarComponent(bokningar) {
   const activeUser = useActiveUser()
-  const [bookings, setBookings] = useState(data.userBookings)
+  const [bookings, setBookings] = useState(bokningar)
   const datesplitter = ((datetime) => format(new Date(datetime), 'PPPP'))
   const [statusSelection, setStatusSelection] = useState("Alla")
   const [selectedCards, setSelectedCards] = useState([{}])
@@ -36,7 +36,8 @@ export default function MinabokningarComponent({ data }) {
 
   useEffect(() => {
     getUserBookings(activeUser).then((booking) => setBookings(booking))
-  }, [activeUser])
+    if (!sorted) setSorted(true)
+  })
 
   if (!bookings || !bookings[0]) {
     return (
@@ -51,21 +52,16 @@ export default function MinabokningarComponent({ data }) {
   function cardClickEvent(item) {
     let cards = []
       selectedCards.forEach((card) => {
-      console.log("itemid", item.booking_id)
       if (item.booking_id === card.booking_id) {
-        console.log("card already clicked")
+        cards.pop()
       } else {
         cards.push(item)
-        console.log("PUSHED")
       }
-      console.log("vaaad", cards)
     })
     if (cards.length < 1) {
       cards.push(item)
     }
     setSelectedCards(cards)
-    console.log("sele", selectedCards)
-    console.log("detta är activueUser", activeUser)
   }
 
   let empty = true
@@ -105,6 +101,7 @@ export default function MinabokningarComponent({ data }) {
                 <ListItem className={styles.listitem} key={booking.booking_id}>BokningsID: #{booking.booking_id}</ListItem>
               </Grid>)
             }
+            return (<span key={booking.booking_id}></span>)
         })}
       </Grid>
 

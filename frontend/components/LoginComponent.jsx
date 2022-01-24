@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { USER_ACTIONS } from '../lib/reducers/activeUserReducer'
 import Link from 'next/link'
 import { Button } from '@material-ui/core'
 import { FaArrowRight } from 'react-icons/fa'
 import styles from '../styles/logincomponent.module.css'
-import { loadUser } from '../components/context/activeUserProvider'
+import { loadUser } from './context/activeUserProvider'
 import useActiveUser from '../lib/hooks/useActiveUser'
 
 const TO_BE_IMPLEMENTED_USER_ID = 1
@@ -23,10 +24,6 @@ export default function LoginComponent() {
         }
 
 
-  })
-  const handleSubmit = ((event) => {
-    event.preventDefault()
-    console.log("username:", username, "  password:", password)
   })
 
 
@@ -58,16 +55,3 @@ export default function LoginComponent() {
 </>
     )
   }
-
-export function login(activeUser) {
-  activeUser.activeUserDispatch({
-  payload: {
-    userId: "1",
-    firstName: "nyttnamn",
-    lastName: "kollaaa",
-    bookings: [{}]
-  },
-  type: USER_ACTIONS.LOGIN
-  })
-  console.log("loggat in ", activeUser)
-}
